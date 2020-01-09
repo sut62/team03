@@ -95,7 +95,7 @@ public class Team03Application {
 					YearRepository.save(Year); // บันทึก Objcet ชื่อ Year
 				});
 	
-				Stream.of("วิชาการ", "กีฬา", "จิตอาสา").forEach(name -> {
+				Stream.of("ชมรมวิชาการ", "ชมรมกีฬา", "ชมรมจิตอาสา").forEach(name -> {
 					ClubType ClubType = new ClubType(); // สร้าง Object ClubType
 					ClubType.setName(name); // set ชื่อ (name) ให้ Object ชื่อ ClubType
 					ClubTypeRepository.save(ClubType); // บันทึก Objcet ชื่อ ClubType
@@ -114,7 +114,7 @@ public class Team03Application {
 					roomRepository.save(room); // บันทึก Objcet ชื่อ 
 				});
 	
-				Stream.of("Club Member1", "Club Member2", "Club Member3").forEach(title -> {
+				Stream.of("อดิศักดิ์","ทิวา", "นันทวุฒิ").forEach(title -> {
 					Clubmember clubmember = new Clubmember(); // สร้าง Object 				
 					clubmember.setName(title); // set ชื่อ (name) ให้ Object  				
 					clubmemberRepository.save(clubmember); // บันทึก Objcet 
