@@ -23,7 +23,7 @@ public class OfficerController {
 
     @GetMapping("/check/{username}/{passoword}")
         public Officer getCheck(@PathVariable("username") String username,
-                                @PathVariable("passoword") String password) {
+                                            @PathVariable("passoword") String password) {
             return OfficerRepository.findCheck(username,password);
     }
 }
