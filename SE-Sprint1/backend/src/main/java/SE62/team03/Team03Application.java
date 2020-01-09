@@ -40,7 +40,7 @@ public class Team03Application {
 				
 // ================================= สร้าง Object Officer ===============================================
 				Officer Officer = new Officer(); // สร้าง Object 
-				Officer.setName("A"); // set ชื่อ (name) ให้ Object ชื่อ 			
+				Officer.setName("เจ้าหน้าที่ฝ่ายบุคคล"); // set ชื่อ (name) ให้ Object ชื่อ 			
 				Officer.setUsername("M1");
 				Officer.setPassword("1234");
 				Officer.setOfficerStatus(1);
@@ -54,21 +54,21 @@ public class Team03Application {
 				OfficerRepository.save(Officer2); // บันทึก Objcet ชื่อ 
 
 				Officer Officer3 = new Officer(); // สร้าง Object 
-				Officer3.setName("c"); // set ชื่อ (name) ให้ Object ชื่อ 				
+				Officer3.setName("เจ้าหน้าที่จัดกิจกรรมชมรม"); // set ชื่อ (name) ให้ Object ชื่อ 				
 				Officer3.setUsername("M3");
 				Officer3.setPassword("1234");
 				Officer3.setOfficerStatus(3);
 				OfficerRepository.save(Officer3); // บันทึก Objcet ชื่อ 
 
 				Officer Officer4 = new Officer(); // สร้าง Object 
-				Officer4.setName("D"); // set ชื่อ (name) ให้ Object ชื่อ 				
+				Officer4.setName("เจ้าหน้าที่ฝ่ายเช่าอุปกรณ์"); // set ชื่อ (name) ให้ Object ชื่อ 				
 				Officer4.setUsername("M4");
 				Officer4.setPassword("1234");
 				Officer4.setOfficerStatus(4);//ใช้เช็คตอน login
 				OfficerRepository.save(Officer4); // บันทึก Objcet ชื่อ 
 
 				Officer Officer5 = new Officer(); // สร้าง Object 
-				Officer5.setName("E"); // set ชื่อ (name) ให้ Object ชื่อ 				
+				Officer5.setName("เจ้าหน้าที่ฝ่ายสถานที่"); // set ชื่อ (name) ให้ Object ชื่อ 				
 				Officer5.setUsername("M5");
 				Officer5.setPassword("1234");
 				Officer5.setOfficerStatus(5);
