@@ -4,15 +4,15 @@
     <br />
     <br />
     <v-card max-width="700" class="mx-auto">
-      <v-system-bar color="#00C853"></v-system-bar>
-      <v-system-bar color="#00E676"></v-system-bar>
+      <v-system-bar color="#34ebeb"></v-system-bar>
+      <v-system-bar color="#34c6eb"></v-system-bar>
       <v-row justify="center">
-        <v-toolbar-title>
+        <v-toolbar-title >
           <h1>Employee Login</h1>
         </v-toolbar-title>
       </v-row>
 
-      <v-row justify="center">
+      <v-row justify="center" >
         <v-col cols="5">
           <v-text-field
             solo
@@ -46,8 +46,8 @@
 
       <br />
       <br />
-      <v-system-bar color="#00E676"></v-system-bar>
-      <v-system-bar color="#00C853"></v-system-bar>
+      <v-system-bar color="#34c6eb"></v-system-bar>
+      <v-system-bar color="#34ebeb"></v-system-bar>
     </v-card>
   </v-container>
 </template>

@@ -265,6 +265,7 @@ export default {
           this.ClubEvent.ClubsHost = "";
           this.ClubEvent.OfficerID = "";
           if (response) {
+            this.$refs.form.reset();
             alert("นัดหมายสำเร็จ");
           }
           // this.$router.push("/view");
