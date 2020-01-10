@@ -11,9 +11,11 @@
 
 การใช้งานโปรเเกรม
 1.Clone ตัวโปรเเกรมจาก git clone git@github.com:sut62/team03/SE-Sprint1.git
+
 2.Backend RUN
 - cd backend
-- ./gradlew bootRun
+- gradlew bootRun
+
 3.Fronend RUN
 - cd cliend
 - npm install
