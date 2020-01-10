@@ -9,12 +9,16 @@
 
 นาย นันทวุฒิ เเซ้นชัยภูมิ B5823475
 
+
+
 การใช้งานโปรเเกรม
 1.Clone ตัวโปรเเกรมจาก git clone git@github.com:sut62/team03/SE-Sprint1.git
+
 
 2.Backend RUN
 - cd backend
 - gradlew bootRun
+
 
 3.Fronend RUN
 - cd cliend
