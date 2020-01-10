@@ -13,7 +13,7 @@
           <v-row>
             <v-col cols="10">
               <v-select
-                label="Club room"
+                label="Clubs"
                 outlined
                 v-model="equipmentRental.club_id"
                 :items="Clubs"
