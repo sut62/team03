@@ -20,5 +20,5 @@ jobs:
 
     - name: Run gradle test
       run: |
-        cd backend
+        cd SE-Sprint1/backend
         ./gradlew test
