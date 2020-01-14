@@ -19,7 +19,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
-
+import lombok.Getter;
+import lombok.Setter;
 import SE62.team03.Repository.*;
 import SE62.team03.Entity.*;
 
@@ -67,7 +68,7 @@ public class ClubEvenController {
     newClubEvent.setClubs(clubs);
     newClubEvent.setClubEventName(ClubEventName);
     newClubEvent.setLocation(location);
-    newClubEvent.setClubEventDate(ClubEventDate);
+    newClubEvent.setClubEventName(ClubEventDate);
     newClubEvent.setClubEventPepleAmount(ClubEventPepleAmount);
     newClubEvent.setClubHost(ClubHost);
     newClubEvent.setOfficer(officer);
