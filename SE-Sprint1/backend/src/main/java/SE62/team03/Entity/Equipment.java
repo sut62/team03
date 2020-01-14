@@ -11,14 +11,14 @@ public class Equipment {
 	@SequenceGenerator(name="Equipment_seq",sequenceName="Equipment_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Equipment_seq")
 	@Column(name="E_id",unique = true, nullable = true)
-	private long E_id;
+	private Long E_id;
 	private @NonNull String E_name;
 
-	public long getE_id() {
+	public Long getE_id() {
 		return this.E_id;
 	}
 
-	public void setE_id(long E_id) {
+	public void setE_id(Long E_id) {
 		this.E_id = E_id;
 	}
 

@@ -15,7 +15,7 @@ public class Budget {
     @SequenceGenerator(name="budget_seq",sequenceName="budget_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="budget_seq")
     @Column(name="budget_Id",unique = true, nullable = false)
-    private long budgetId;
+    private Long budgetId;
 
 
     @NotNull 
