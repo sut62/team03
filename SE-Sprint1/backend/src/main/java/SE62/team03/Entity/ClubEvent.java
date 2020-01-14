@@ -1,9 +1,6 @@
 package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 @Data
 @Entity
 @NoArgsConstructor
@@ -13,12 +10,12 @@ public class ClubEvent {
   @SequenceGenerator(name="ClubEvent_SEQ",sequenceName="ClubEvent_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ClubEvent_SEQ")
   @Column(name="ClubEvent_ID",unique = true, nullable = true)
-  @Getter @Setter private @NonNull Long clubEventID;
 
-  @Getter @Setter private @NonNull String ClubEventName;
-  @Getter @Setter private @NonNull String ClubEventDate;
-  @Getter @Setter private @NonNull String ClubHost;
-  @Getter @Setter private @NonNull long ClubEventPepleAmount;
+  private @NonNull Long clubEventID;
+  private @NonNull String ClubEventName;
+  private @NonNull String ClubEventDate;
+  private @NonNull String ClubHost;
+  private @NonNull Long ClubEventPepleAmount;
   
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)

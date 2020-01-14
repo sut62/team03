@@ -37,10 +37,10 @@ public class OfficerTest {
     void tesOfficerNameMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName(null);
-        officer.setOfficerStatus(1L);
+        officer.setOfficerStatus(1);
         officer.setPassword("1234");
         officer.setUsername("M1");
-        officer.setId(1L);
+        officer.setId(1);
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
         assertEquals(1, result.size());
@@ -54,10 +54,10 @@ public class OfficerTest {
     void testOfficerIdMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1L);
+        officer.setOfficerStatus(1);
         officer.setPassword("1234");
         officer.setUsername("M1");
-        officer.setId(null);
+        officer.setId(1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -72,10 +72,10 @@ public class OfficerTest {
     void testOfficerStatusMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(null);
+        officer.setOfficerStatus(1);
         officer.setPassword("1234");
         officer.setUsername("M1");
-        officer.setId(1L);
+        officer.setId(1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -90,10 +90,10 @@ public class OfficerTest {
     void testPasswordMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1L);
+        officer.setOfficerStatus(1);
         officer.setPassword(null);
         officer.setUsername("M1");
-        officer.setId(1L);
+        officer.setId(1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -108,10 +108,10 @@ public class OfficerTest {
     void testUsernameMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1L);
+        officer.setOfficerStatus(1);
         officer.setPassword("1234");
         officer.setUsername(null);
-        officer.setId(1L);
+        officer.setId(1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 

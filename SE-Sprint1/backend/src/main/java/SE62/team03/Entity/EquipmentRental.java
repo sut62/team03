@@ -12,7 +12,7 @@ public class EquipmentRental {
     @SequenceGenerator(name="EquipmentRental_seq",sequenceName="EquipmentRental_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EquipmentRental_seq")
     @Column(name = "EquipmentRental_id", unique = true, nullable = true)
-    private long EquipmentRental_id;
+    private Long EquipmentRental_id;
     private @NonNull Date EquipmentRental_date;
     private @NonNull String note;
     private @NonNull String renter_name;
@@ -33,11 +33,11 @@ public class EquipmentRental {
         this.note = note;
     }
 
-    public long getEquipmentRental_id() {
+    public Long getEquipmentRental_id() {
         return this.EquipmentRental_id;
     }
 
-    public void setEquipmentRental_id(long EquipmentRental_id) {
+    public void setEquipmentRental_id(Long EquipmentRental_id) {
         this.EquipmentRental_id = EquipmentRental_id;
     }
 
