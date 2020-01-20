@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
+
 
 import SE62.team03.Entity.Budget;
 import SE62.team03.Repository.BudgetRepository;
@@ -13,11 +13,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Optional;
+
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @DataJpaTest
 public class BudgetTest {
@@ -40,9 +40,6 @@ public class BudgetTest {
         budget.setBudgetId(null);
 
         Set<ConstraintViolation<Budget>> result = validator.validate(budget);
-
-        assertEquals(1, result.size());
-
         ConstraintViolation<Budget> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("budgetId", v.getPropertyPath().toString());

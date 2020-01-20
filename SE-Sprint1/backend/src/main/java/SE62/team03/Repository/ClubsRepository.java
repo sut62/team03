@@ -6,7 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public
 interface ClubsRepository extends JpaRepository<Clubs, Long> {
-    Clubs findById(long id);
-    Clubs findClubsById(Long ClubsId);
+    Clubs findById(long ClubsId);
     
 }

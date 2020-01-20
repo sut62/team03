@@ -6,9 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public
 interface LocationRepository extends JpaRepository<Location, Long> {
-
-    Location findById(long id);
-
-
-	Location findLocationById(Long LocationId);
+	Location findById(long LocationId);
 }

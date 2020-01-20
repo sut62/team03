@@ -13,7 +13,7 @@ public class EquipmentRental {
     @SequenceGenerator(name="EquipmentRental_seq",sequenceName="EquipmentRental_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EquipmentRental_seq")
     @Column(name = "EquipmentRental_id", unique = true, nullable = true)
-    private Long EquipmentRental_id;
+    private @NotNull Long EquipmentRental_id;
     private @NotNull Date EquipmentRental_date;
     private @NotNull String note;
     private @NotNull String renter_name;

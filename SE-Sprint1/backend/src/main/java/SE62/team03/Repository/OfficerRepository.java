@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 public
 interface OfficerRepository extends JpaRepository<Officer, Long> {
     Officer findById(long id);
-    Officer findOfficerById(Long OfficerId);
+    Officer findOfficerStatusById(long OfficerStatus);
 
 // ================================= เช็ค officer --> login ===============================================
     @Query( value = "SELECT * FROM Officer z Where z.username = :username and z.password = :password",

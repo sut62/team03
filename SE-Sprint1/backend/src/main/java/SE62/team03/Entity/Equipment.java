@@ -11,7 +11,7 @@ public class Equipment {
 	@SequenceGenerator(name="Equipment_seq",sequenceName="Equipment_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Equipment_seq")
 	@Column(name="E_id",unique = true, nullable = true)
-	private Long E_id;
+	private @NotNull Long E_id;
 	private @NotNull String E_name;
 
 	public Long getE_id() {

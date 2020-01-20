@@ -15,7 +15,7 @@ public class Budget {
     @SequenceGenerator(name="budget_seq",sequenceName="budget_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="budget_seq")
     @Column(name="budget_Id",unique = true, nullable = false)
-    private Long budgetId;
+    private @NotNull Long budgetId;
 
 
     @NotNull 
@@ -73,6 +73,10 @@ public class Budget {
     public void setClubmember(Clubmember clubmember) {
         this.clubmember = clubmember;
     }
+
+	public void setBudgetId(Long budgetId) {
+        this.budgetId = budgetId;
+	}
 
    
     
