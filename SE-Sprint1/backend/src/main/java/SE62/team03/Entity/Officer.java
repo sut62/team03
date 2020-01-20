@@ -12,11 +12,11 @@ public class Officer {
   @SequenceGenerator(name="Officer_SEQ",sequenceName="Officer_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Officer_SEQ")
   @Column(name="Officer_ID",unique = true, nullable = true)
-  private @NotNull long id;
+  private @NotNull Long id;
   private @NotNull String name;
   private @NotNull String username;
   private @NotNull String password;
-  private @NotNull int OfficerStatus; //ใช้เช็คตอน login
+  private @NotNull Long OfficerStatus; //ใช้เช็คตอน login
 
   @OneToMany(fetch = FetchType.EAGER)
   private Collection<ClubEvent> Event;
@@ -33,8 +33,12 @@ public class Officer {
     this.password = password;
   }
 
-  public void setOfficerStatus(int officerStatus) {
-    this.OfficerStatus = officerStatus;
+  public void setOfficerStatus(Long OfficerStatus) {
+    this.OfficerStatus = OfficerStatus;
   }
+
+public void setId(Long id) {
+  this.id = id;
+}
 
 }

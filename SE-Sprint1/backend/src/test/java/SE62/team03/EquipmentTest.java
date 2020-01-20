@@ -60,7 +60,6 @@ public class EquipmentTest {
 
         ConstraintViolation<Equipment> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("E_id", v.getPropertyPath().toString());
     }
 
    

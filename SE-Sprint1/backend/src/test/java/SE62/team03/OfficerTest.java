@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
+
 
 import SE62.team03.Entity.Officer;
 import SE62.team03.Repository.OfficerRepository;
@@ -13,11 +13,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Optional;
+
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @DataJpaTest
 public class OfficerTest {
@@ -37,10 +37,10 @@ public class OfficerTest {
     void tesOfficerNameMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName(null);
-        officer.setOfficerStatus(1);
+        officer.setOfficerStatus((long)1);
         officer.setPassword("1234");
         officer.setUsername("M1");
-        officer.setId(1);
+        officer.setId((long)1);
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
         assertEquals(1, result.size());
@@ -54,10 +54,10 @@ public class OfficerTest {
     void testOfficerIdMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1);
+        officer.setOfficerStatus((long)1);
         officer.setPassword("1234");
         officer.setUsername("M1");
-        officer.setId(1);
+        officer.setId(null);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -72,10 +72,10 @@ public class OfficerTest {
     void testOfficerStatusMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1);
+        officer.setOfficerStatus(null);
         officer.setPassword("1234");
         officer.setUsername("M1");
-        officer.setId(1);
+        officer.setId((long)1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -90,10 +90,10 @@ public class OfficerTest {
     void testPasswordMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1);
+        officer.setOfficerStatus((long)1);
         officer.setPassword(null);
         officer.setUsername("M1");
-        officer.setId(1);
+        officer.setId((long)1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -108,10 +108,10 @@ public class OfficerTest {
     void testUsernameMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus(1);
+        officer.setOfficerStatus((long)1);
         officer.setPassword("1234");
         officer.setUsername(null);
-        officer.setId(1);
+        officer.setId((long)1);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
