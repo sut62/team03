@@ -2,6 +2,7 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -11,8 +12,8 @@ public class Location {
   @SequenceGenerator(name="Location_SEQ",sequenceName="Location_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Location_SEQ")
   @Column(name="Location_ID",unique = true, nullable = true)
-  private @NonNull Long id;
-  private @NonNull String name;
+  private @NotNull Long id;
+  private @NotNull String name;
 
 
   @OneToMany(fetch = FetchType.EAGER)

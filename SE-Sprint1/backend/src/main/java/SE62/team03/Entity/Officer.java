@@ -2,6 +2,7 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -11,11 +12,11 @@ public class Officer {
   @SequenceGenerator(name="Officer_SEQ",sequenceName="Officer_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Officer_SEQ")
   @Column(name="Officer_ID",unique = true, nullable = true)
-  private @NonNull int id;
-  private @NonNull String name;
-  private @NonNull String username;
-  private @NonNull String password;
-  private @NonNull int OfficerStatus; //ใช้เช็คตอน login
+  private @NotNull long id;
+  private @NotNull String name;
+  private @NotNull String username;
+  private @NotNull String password;
+  private @NotNull int OfficerStatus; //ใช้เช็คตอน login
 
   @OneToMany(fetch = FetchType.EAGER)
   private Collection<ClubEvent> Event;

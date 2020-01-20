@@ -2,7 +2,7 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
-
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -12,8 +12,8 @@ public class ClubType {
 	@SequenceGenerator(name="ClubType_seq",sequenceName="ClubType_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ClubType_seq")
 	@Column(name="ClubType_ID",unique = true, nullable = true)
-	private @NonNull Long id;
-	private @NonNull String name;
+	private @NotNull Long id;
+	private @NotNull String name;
 
    @OneToMany(fetch = FetchType.EAGER)
 	private Collection<Clubs> Clubs;

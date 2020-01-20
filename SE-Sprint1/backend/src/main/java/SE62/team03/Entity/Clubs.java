@@ -2,7 +2,7 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
-
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -14,11 +14,11 @@ public class Clubs {
   @Column(name="Clubs_ID",unique = true, nullable = true)
   
 
-  private @NonNull Long id;
-  private @NonNull String ClubName;
-  private @NonNull String ClubPresident;
-  private @NonNull String Objective;
-  private @NonNull String advisors;
+  private @NotNull Long id;
+  private @NotNull String ClubName;
+  private @NotNull String ClubPresident;
+  private @NotNull String Objective;
+  private @NotNull String advisors;
 
   @OneToMany(fetch = FetchType.EAGER)
   private Collection<ClubEvent> Event;

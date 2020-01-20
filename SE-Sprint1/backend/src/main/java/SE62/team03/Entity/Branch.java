@@ -1,6 +1,9 @@
 package SE62.team03.Entity;
+
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.*;
 
 @Data
@@ -12,8 +15,8 @@ public class Branch {
 	@SequenceGenerator(name="Branch_seq",sequenceName="Branch_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Branch_seq")
 	@Column(name="Branch_ID",unique = true, nullable = true)
-	private @NonNull Long id;
-	private @NonNull String name;
+	private @NotNull Long id;
+	private @NotNull String name;
 
    @OneToMany(fetch = FetchType.EAGER)
 	private Collection<Clubs> Clubs;

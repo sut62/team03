@@ -1,6 +1,8 @@
 package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.*;
 
 
@@ -14,11 +16,11 @@ public class Booking {
     @SequenceGenerator(name="booking_seq",sequenceName="booking_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="booking_seq")
     @Column(name = "BOOKING_ID", unique = true, nullable = true)
-    private @NonNull Long id;
+    private @NotNull Long id;
   
 
     @Column(name="BOOKING_DATE")
-    private @NonNull Date bookingDate;
+    private @NotNull Date bookingDate;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sitestaff.class)
     @JoinColumn(name = "SITESTAFF_ID", insertable = true)

@@ -1,7 +1,7 @@
 package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
-
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -12,7 +12,7 @@ public class Equipment {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Equipment_seq")
 	@Column(name="E_id",unique = true, nullable = true)
 	private Long E_id;
-	private @NonNull String E_name;
+	private @NotNull String E_name;
 
 	public Long getE_id() {
 		return this.E_id;
