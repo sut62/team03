@@ -1,6 +1,8 @@
 package SE62.team03.Entity;
+
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -11,11 +13,11 @@ public class ClubEvent {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ClubEvent_SEQ")
   @Column(name="ClubEvent_ID",unique = true, nullable = true)
 
-  private @NonNull Long clubEventID;
-  private @NonNull String ClubEventName;
-  private @NonNull String ClubEventDate;
-  private @NonNull String ClubHost;
-  private @NonNull Long ClubEventPepleAmount;
+  private @NotNull Long clubEventID;
+  private @NotNull String ClubEventName;
+  private @NotNull String ClubEventDate;
+  private @NotNull String ClubHost;
+  private @NotNull Long ClubEventPepleAmount;
   
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)

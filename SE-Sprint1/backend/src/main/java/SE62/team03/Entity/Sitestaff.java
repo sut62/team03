@@ -2,7 +2,7 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 
-
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -13,8 +13,8 @@ public class Sitestaff {
 	@SequenceGenerator(name="SITESTAFF_SEQ",sequenceName="SITESTAFF_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SITESTAFF_SEQ")
 	@Column(name="SITESTAFF_ID",unique = true, nullable = true)
-	private @NonNull Long id;
-	private @NonNull String name;
+	private @NotNull Long id;
+	private @NotNull String name;
 
 	public Long getId() {
 		return id;

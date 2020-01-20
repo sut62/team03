@@ -2,6 +2,7 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
+import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
@@ -13,9 +14,9 @@ public class EquipmentRental {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EquipmentRental_seq")
     @Column(name = "EquipmentRental_id", unique = true, nullable = true)
     private Long EquipmentRental_id;
-    private @NonNull Date EquipmentRental_date;
-    private @NonNull String note;
-    private @NonNull String renter_name;
+    private @NotNull Date EquipmentRental_date;
+    private @NotNull String note;
+    private @NotNull String renter_name;
 
     public String getRenter_name() {
         return this.renter_name;
