@@ -123,7 +123,7 @@ public class OfficerTest {
     }
 
     @Test
-    void testUsernamedigit5() {
+    void B5823475_testUsernamedigit5() {
         Officer officer = new Officer();
         officer.setName("Officer name");
         officer.setOfficerStatus(1L);

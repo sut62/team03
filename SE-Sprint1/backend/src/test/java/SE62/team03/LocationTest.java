@@ -47,7 +47,7 @@ public class LocationTest {
     }
 
     @Test
-    void testLocationIdMustNotBeNull() {
+    void B5823475_testLocationIdMustNotBeNull() {
         Location location = new Location();
         location.setName("location");
         location.setId(null);
@@ -62,14 +62,14 @@ public class LocationTest {
     }
 
     @Test
-    void testLocationNameDigitMin4Max30() {
+    void B5823475_testLocationNameDigitMin4Max30() {
         Location location = new Location();
         location.setName("ABC");
         location.setId(1L);
         Set<ConstraintViolation<Location>> result = validator.validate(location);
         assertEquals(1, result.size());
         ConstraintViolation<Location> v = result.iterator().next();
-        // assertEquals("must match @Size (min = 4,max = 30) ", v.getMessage());
-        // assertEquals("name", v.getPropertyPath().toString());
+        assertEquals("size must be between 4 and 30", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
     }
 }
