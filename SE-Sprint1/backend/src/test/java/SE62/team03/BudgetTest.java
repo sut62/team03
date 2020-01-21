@@ -34,7 +34,7 @@ public class BudgetTest {
     }
 
     @Test
-    void testBudgetIdMustNotBeNull() {
+    void B5815234_testBudgetIdMustNotBeNull() {
         Budget budget = new Budget();
         budget.setAmount(123456);
         budget.setBudgetId(null);

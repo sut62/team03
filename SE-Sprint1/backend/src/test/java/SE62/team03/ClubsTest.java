@@ -34,7 +34,7 @@ public class ClubsTest {
     }
 
     @Test
-    void tesClubsNameMustNotBeNull() {
+    void B5827657_tesClubsNameMustNotBeNull() {
         Clubs clubs = new Clubs();
         clubs.setClubName(null);
         clubs.setClubPresident("นายประธาน ชมรม");

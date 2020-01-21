@@ -34,7 +34,7 @@ public class BookingTest {
     }
 
     @Test
-    void tesBookingDateMustNotBeNull() {
+    void B5815029_tesBookingDateMustNotBeNull() {
         Booking booking = new Booking();
         booking.setBookingDate(null);
         booking.setId(1L);

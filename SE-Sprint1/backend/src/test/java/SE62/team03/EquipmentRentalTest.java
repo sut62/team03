@@ -36,7 +36,7 @@ public class EquipmentRentalTest {
     }
 
     @Test
-    void testEquipmentRentalIdMustNotBeNull() {
+    void B5823291_testEquipmentRentalIdMustNotBeNull() {
         EquipmentRental equipmentRental = new EquipmentRental();
         Date date = new Date();
         equipmentRental.setEquipmentRental_date(date);
