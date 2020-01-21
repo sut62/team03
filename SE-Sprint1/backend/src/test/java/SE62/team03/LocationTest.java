@@ -49,7 +49,7 @@ public class LocationTest {
     @Test
     void testLocationIdMustNotBeNull() {
         Location location = new Location();
-        location.setName("location name");
+        location.setName("location");
         location.setId(null);
 
         Set<ConstraintViolation<Location>> result = validator.validate(location);
@@ -59,5 +59,17 @@ public class LocationTest {
         ConstraintViolation<Location> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("id", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void testLocationNameDigitMin4Max30() {
+        Location location = new Location();
+        location.setName("ABC");
+        location.setId(1L);
+        Set<ConstraintViolation<Location>> result = validator.validate(location);
+        assertEquals(1, result.size());
+        ConstraintViolation<Location> v = result.iterator().next();
+        // assertEquals("must match @Size (min = 4,max = 30) ", v.getMessage());
+        // assertEquals("name", v.getPropertyPath().toString());
     }
 }

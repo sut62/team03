@@ -25,11 +25,7 @@ public class Budget {
         return budgetId;
     }
 
-    public void setBudgetI(Long budgetId) {
-        this.budgetId = budgetId;
-    }
 
- 
     public int getAmount() {
         return amount;
     }
@@ -55,8 +51,6 @@ public class Budget {
     public Clubs getClubs() {
         return clubs;
     }
-
-    
 
     public ClubType getClubType() {
         return ClubType;
