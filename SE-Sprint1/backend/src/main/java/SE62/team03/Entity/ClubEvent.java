@@ -41,4 +41,10 @@ public class ClubEvent {
   @JoinColumn(name = "Location_ID", insertable = true)
   @Getter @Setter private Location location;
 
+  public Long getId() {
+    return clubEventID;
+}
+
+
+
 }

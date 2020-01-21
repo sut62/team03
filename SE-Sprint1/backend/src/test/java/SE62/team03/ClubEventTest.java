@@ -34,7 +34,7 @@ public class ClubEventTest {
     }
 
     @Test
-    void tesClubEventIdMustNotBeNull() {
+    void testClubEventIdMustNotBeNull() {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(null);
         clubEvent.setClubEventName("โครงการ");
@@ -46,6 +46,20 @@ public class ClubEventTest {
         ConstraintViolation<ClubEvent> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("clubEventID", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5823475_testClubEvent() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("โครงการ");
+        clubEvent.setClubEventPepleAmount(60L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventDate("10-01-2020");
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+
+        Optional<ClubEvent> found = ClubEventRepository.findById(clubEvent.getId());
+        //assertEquals("1L", found.get().getId());
     }
 
     @Test
