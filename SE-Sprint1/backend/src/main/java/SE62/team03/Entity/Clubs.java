@@ -3,6 +3,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 @Data
 @Entity
 @NoArgsConstructor
@@ -16,6 +18,7 @@ public class Clubs {
 
   private @NotNull Long id;
   private @NotNull String ClubName;
+  @Size(max = 25)
   private @NotNull String ClubPresident;
   private @NotNull String Objective;
   private @NotNull String advisors;

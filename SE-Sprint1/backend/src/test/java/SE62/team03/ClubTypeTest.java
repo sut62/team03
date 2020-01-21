@@ -60,4 +60,5 @@ public class ClubTypeTest {
         assertEquals("must not be null", v.getMessage());
         assertEquals("id", v.getPropertyPath().toString());
     }
+   
 }
