@@ -3,6 +3,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 @Data
 @Entity
 @NoArgsConstructor
@@ -14,6 +16,7 @@ public class ClubType {
 	@Column(name="ClubType_ID",unique = true, nullable = true)
 	private @NotNull Long id;
 	private @NotNull String name;
+    @Size(max = 25)
 
    @OneToMany(fetch = FetchType.EAGER)
 	private Collection<Clubs> Clubs;

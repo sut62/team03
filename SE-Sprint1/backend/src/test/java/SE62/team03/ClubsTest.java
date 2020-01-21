@@ -32,6 +32,24 @@ public class ClubsTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
+    @Test
+    void B5827657_tesClubFull() {
+        Clubs clubs = new Clubs();
+        clubs.setClubName("ชมรม");
+        clubs.setClubPresident("นายประธาน ชมรม");
+        clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
+        clubs.setObjective("วัตถุประสงค์ชมรม");
+
+        clubs = ClubsRepository.saveAndFlush(clubs);
+        Optional<Clubs> found = ClubsRepository.findById(clubs.getId());
+
+
+
+        assertEquals("ชมรม", found.get().getClubName());
+        assertEquals("นายประธาน ชมรม", found.get().getClubPresident());
+        assertEquals("อาจารย์ที่ปรึกษาชรม", found.get().getAdvisors());
+        assertEquals("วัตถุประสงค์ชมรม", found.get().getObjective());
+    }
 
     @Test
     void B5827657_tesClubsNameMustNotBeNull() {
@@ -117,4 +135,7 @@ public class ClubsTest {
         assertEquals("must not be null", v.getMessage());
         assertEquals("advisors", v.getPropertyPath().toString());
     }
+
+
+
 }
