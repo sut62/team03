@@ -3,6 +3,9 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -15,9 +18,15 @@ public class ClubEvent {
 
   private @NotNull Long clubEventID;
   private @NotNull String ClubEventName;
-  private @NotNull String ClubEventDate;
+  private 
+  //@DateTimeFormat(pattern = "dd-mm-yyyy")
+  @NotNull String ClubEventDate;
   private @NotNull String ClubHost;
-  private @NotNull Long ClubEventPepleAmount;
+
+  private 
+  //@Size (min = 5,max = 100)
+  //@Pattern(regexp = "\\d{5-100}")
+  @NotNull Long ClubEventPepleAmount;
   
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)

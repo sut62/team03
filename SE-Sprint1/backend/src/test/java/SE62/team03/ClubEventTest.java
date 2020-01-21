@@ -38,9 +38,9 @@ public class ClubEventTest {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(null);
         clubEvent.setClubEventName("โครงการ");
-        clubEvent.setClubEventPepleAmount(2L);
+        clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("2020-01-07");
+        clubEvent.setClubEventDate("10-01-2020");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
         assertEquals(1, result.size());
@@ -55,9 +55,9 @@ public class ClubEventTest {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(1L);
         clubEvent.setClubEventName(null);
-        clubEvent.setClubEventPepleAmount(2L);
+        clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("2020-01-07");
+        clubEvent.setClubEventDate("10-01-2020");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
         assertEquals(1, result.size());
@@ -72,9 +72,9 @@ public class ClubEventTest {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(1L);
         clubEvent.setClubEventName("โครงการ");
-        clubEvent.setClubEventPepleAmount(2L);
+        clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost(null);
-        clubEvent.setClubEventDate("2020-01-07");
+        clubEvent.setClubEventDate("10-01-2020");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
         assertEquals(1, result.size());
@@ -89,7 +89,7 @@ public class ClubEventTest {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(1L);
         clubEvent.setClubEventName("โครงการ");
-        clubEvent.setClubEventPepleAmount(2L);
+        clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventDate(null);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
@@ -108,7 +108,7 @@ public class ClubEventTest {
         clubEvent.setClubEventName("โครงการ");
         clubEvent.setClubEventPepleAmount(null);
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("2020-01-07");
+        clubEvent.setClubEventDate("10-01-2020");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
         assertEquals(1, result.size());
@@ -117,4 +117,21 @@ public class ClubEventTest {
         assertEquals("must not be null", v.getMessage());
         assertEquals("ClubEventPepleAmount", v.getPropertyPath().toString());
     }
+
+    // @Test
+    // void testClubEventDateTimeFormatpatternl() {
+    //     ClubEvent clubEvent = new ClubEvent();
+    //     clubEvent.setClubEventID(1L);
+    //     clubEvent.setClubEventName("โครงการ");
+    //     clubEvent.setClubEventPepleAmount(62L);
+    //     clubEvent.setClubHost("Host");
+    //     clubEvent.setClubEventDate("100-01-2020");
+    //     Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+    //     assertEquals(1, result.size());
+    //     ConstraintViolation<ClubEvent> v = result.iterator().next();
+    //     assertEquals("DateTimeFormat", v.getMessage());
+    //     assertEquals("ClubEventPepleAmount", v.getPropertyPath().toString());
+    // }
+
+    
 }
