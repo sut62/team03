@@ -6,4 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public
 interface ClubEventRepository extends JpaRepository<ClubEvent, Long> {
+    ClubEvent findById(long id);
 }
