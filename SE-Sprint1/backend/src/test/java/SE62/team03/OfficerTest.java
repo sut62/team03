@@ -37,10 +37,10 @@ public class OfficerTest {
     void tesOfficerNameMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName(null);
-        officer.setOfficerStatus((long)1);
+        officer.setOfficerStatus(1L);
         officer.setPassword("1234");
-        officer.setUsername("M1");
-        officer.setId((long)1);
+        officer.setUsername("55555");
+        officer.setId(1L);
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
         assertEquals(1, result.size());
@@ -54,9 +54,9 @@ public class OfficerTest {
     void testOfficerIdMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus((long)1);
+        officer.setOfficerStatus(1L);
         officer.setPassword("1234");
-        officer.setUsername("M1");
+        officer.setUsername("55555");
         officer.setId(null);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
@@ -74,8 +74,8 @@ public class OfficerTest {
         officer.setName("Officer name");
         officer.setOfficerStatus(null);
         officer.setPassword("1234");
-        officer.setUsername("M1");
-        officer.setId((long)1);
+        officer.setUsername("55555");
+        officer.setId(1L);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -90,10 +90,10 @@ public class OfficerTest {
     void testPasswordMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus((long)1);
+        officer.setOfficerStatus(1L);
         officer.setPassword(null);
-        officer.setUsername("M1");
-        officer.setId((long)1);
+        officer.setUsername("55555");
+        officer.setId(1L);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -108,10 +108,10 @@ public class OfficerTest {
     void testUsernameMustNotBeNull() {
         Officer officer = new Officer();
         officer.setName("Officer name");
-        officer.setOfficerStatus((long)1);
-        officer.setPassword("1234");
+        officer.setOfficerStatus(1L);
+        officer.setPassword("12345");
         officer.setUsername(null);
-        officer.setId((long)1);
+        officer.setId(1L);
 
         Set<ConstraintViolation<Officer>> result = validator.validate(officer);
 
@@ -120,5 +120,23 @@ public class OfficerTest {
         ConstraintViolation<Officer> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("username", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void testUsernamedigit5() {
+        Officer officer = new Officer();
+        officer.setName("Officer name");
+        officer.setOfficerStatus(1L);
+        officer.setPassword("1234");
+        officer.setUsername("B1");
+        officer.setId(1L);
+
+        Set<ConstraintViolation<Officer>> result = validator.validate(officer);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Officer> v = result.iterator().next();
+        // assertEquals("must not be null", v.getMessage()); //error รอแก้
+        // assertEquals("username", v.getPropertyPath().toString());
     }
 }

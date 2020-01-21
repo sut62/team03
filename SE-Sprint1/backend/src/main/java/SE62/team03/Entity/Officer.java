@@ -1,8 +1,10 @@
 package SE62.team03.Entity;
+
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 @Data
 @Entity
 @NoArgsConstructor
@@ -14,7 +16,12 @@ public class Officer {
   @Column(name="Officer_ID",unique = true, nullable = true)
   private @NotNull Long id;
   private @NotNull String name;
-  private @NotNull String username;
+
+  private 
+  // @Pattern(regexp = "\\M")
+  @Pattern(regexp = "\\d{5}")
+  @NotNull String username;
+
   private @NotNull String password;
   private @NotNull Long OfficerStatus; //ใช้เช็คตอน login
 
