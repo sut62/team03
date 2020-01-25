@@ -25,7 +25,7 @@ public class Team03Application {
 	 ClubTypeRepository ClubTypeRepository,
 	 SitestaffRepository sitestaffRepository,
 	 RoomRepository roomRepository,
-	 ClubmemberRepository clubmemberRepository,
+	 ClubmemberRepository ClubmemberRepository,
 	 EquipmentRentalRepository equipmentRentalRepository,
 	 EquipmentRepository equipmentRepository) {
 		return args -> {
@@ -76,13 +76,16 @@ public class Team03Application {
 				
 // ================================= สร้าง Object Club ===============================================				
 				Clubs Clubs = new Clubs(); // สร้าง Object Doctor
-				Clubs.setName("อาสา"); // set ชื่อ (name) ให้ Object ชื่อ Doctor				
+				Clubs.setName("ชมรมคอมพิวเตอร์"); // set ชื่อ (name) ให้ Object ชื่อ Doctor				
 				Clubs.setAdvisor("มะลิ"); // set ชื่อ (name) ให้ Object ชื่อ Doctor
 				Clubs.setClubPresident("มะละ");
 				Clubs.setObjective("55555555");
 				ClubsRepository.save(Clubs); // บันทึก Objcet ชื่อ Doctor
-
-
+// ================================= สร้าง Object Clubmember ===============================================				
+               Clubmember Clubmember = new Clubmember(); // สร้าง Object Clubmember
+			   Clubmember.setName("พระจันทร์"); // set ชื่อ (name) ให้ Object ชื่อ Clubmember
+			   ClubmemberRepository.save(Clubmember);// บันทึก Objcet ชื่อ Clubmember
+				
 // ================================= สร้าง Object ของปอน ===============================================
 				Stream.of("วิศวกรรมคอมพิวเตอร์", "วิศวกรรมเครื่องกล", "เทคโนโลยีการผลิคสัตว์", "เทคโนโลยีสารสนเทศ").forEach(name -> {
 					Branch Branch = new Branch(); // สร้าง Object Branch
@@ -114,12 +117,7 @@ public class Team03Application {
 					roomRepository.save(room); // บันทึก Objcet ชื่อ 
 				});
 	
-				Stream.of("อดิศักดิ์","ทิวา", "นันทวุฒิ").forEach(title -> {
-					Clubmember clubmember = new Clubmember(); // สร้าง Object 				
-					clubmember.setName(title); // set ชื่อ (name) ให้ Object  				
-					clubmemberRepository.save(clubmember); // บันทึก Objcet 
-				});
-
+			
 // ================================= สร้าง Object ของมิ้น===============================================
 				Stream.of("ตู้เก็บของ", "เครื่องปริ้น", "เลื่อยไฟฟ้า").forEach(e_name -> {
 					Equipment equipment = new Equipment();
