@@ -52,7 +52,7 @@ public class BookingController {
     @PostMapping("/booking/{club_id}/{sitestaff_id}/{clubmember_id}/{booking}/{date}")
     public Booking newBooking(@PathVariable long club_id, @PathVariable long sitestaff_id,
             @PathVariable long clubmember_id, @PathVariable long booking,
-            @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date)
+            @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") String date)//
              {
         // VideoRental newVideoRental = new VideoRental();
         Booking newBooking = new Booking();
