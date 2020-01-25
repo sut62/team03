@@ -19,8 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
-import lombok.Getter;
-import lombok.Setter;
+
 import SE62.team03.Repository.*;
 import SE62.team03.Entity.*;
 
@@ -57,7 +56,7 @@ public class ClubEvenController {
     @PathVariable String ClubEventDate,
     @PathVariable long ClubEventPepleAmount,
     @PathVariable String ClubHost,
-    @PathVariable long OfficerID){
+    @PathVariable long OfficerID) {
 
 
     ClubEvent newClubEvent = new ClubEvent();
@@ -68,10 +67,11 @@ public class ClubEvenController {
     newClubEvent.setClubs(clubs);
     newClubEvent.setClubEventName(ClubEventName);
     newClubEvent.setLocation(location);
-    newClubEvent.setClubEventName(ClubEventDate);
+    newClubEvent.setClubEventDate(ClubEventDate);
     newClubEvent.setClubEventPepleAmount(ClubEventPepleAmount);
     newClubEvent.setClubHost(ClubHost);
     newClubEvent.setOfficer(officer);
+    newClubEvent.setClubsEventStatus("รออนุมัติ");
     
     return ClubEventRepository.save(newClubEvent); //บันทึก Objcet 
     
