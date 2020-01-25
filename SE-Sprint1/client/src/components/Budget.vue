@@ -11,7 +11,7 @@
       <v-col cols="4">
         <v-form v-model="valid" ref="form">
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Club"
                 outlined
@@ -26,7 +26,7 @@
           </v-row>
 
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Club Type"
                 outlined
@@ -43,13 +43,13 @@
        
 
            <v-row>
-            <v-col cols="12" sm="10" md="10">
+            <v-col cols="12" sm="12" md="12">
               <v-text-field label="Budget" v-model="amount" outlined></v-text-field>
             </v-col>
           </v-row>
      
             <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Member Name"
                 outlined
@@ -66,9 +66,12 @@
           <v-row justify="center">
             <v-col cols="12">
               <v-btn @click="savebudget" :class="{ red: !valid, green: valid }">submit</v-btn>
-              <v-btn style="margin-left: 50px;" @click="clear">clear</v-btn>
+              <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+              <v-btn style="float: right" color="primary" @click="viewData">ดูข้อมูล</v-btn>
+              
             </v-col>
           </v-row>
+          
           <br />
         </v-form>
       </v-col>
@@ -82,7 +85,9 @@ import http from "../http-common";
 export default {
   name: "Budget",
   data() {
+
     return {
+    
      Budget: {
         clubId: "",
         clubtypeId: "",  
@@ -181,7 +186,10 @@ export default {
          this.getClubs();
          this.getClubType();
          this.getClubmember();
-      }
+      },
+       viewData() {
+      this.$router.push("/BudgetData")
+    },
       /* eslint-enable no-console */
 
 
