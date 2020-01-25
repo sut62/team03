@@ -3,10 +3,6 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -19,31 +15,58 @@ public class ClubEvent {
   @Column(name="ClubEvent_ID",unique = true, nullable = true)
 
   private @NotNull Long clubEventID;
-  private @NotNull String ClubEventName;
-  private @NotNull String ClubEventDate;
-  private @NotNull String ClubHost;
-
-  private 
-  //@Size (min = 1,max = 3)
-  //@Pattern(regexp = "\\d{5-100}")
-  @NotNull Long ClubEventPepleAmount;
+  private @NotNull String clubEventName;
+  private @NotNull String clubEventDate;
+  private @NotNull String clubHost;
+  private @NotNull Long clubEventPepleAmount;
+  String clubEventStatus;
   
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)
   @JoinColumn(name = "Clubs_ID", insertable = true)
-  @Getter @Setter private Clubs clubs;
+  private Clubs clubs;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Officer.class)
   @JoinColumn(name = "Officer_ID", insertable = true)
-  @Getter @Setter private Officer officer;
+  private Officer officer;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Location.class)
   @JoinColumn(name = "Location_ID", insertable = true)
-  @Getter @Setter private Location location;
+  private Location location;
 
-  public Long getId() {
-    return clubEventID;
+  public Officer getOfficer() {
+    return this.officer;
 }
+
+public void setOfficer(Officer officer) {
+    this.officer = officer;
+
+}
+
+public void setClubs(Clubs clubs) {
+  this.clubs = clubs;
+}
+public Clubs getClubs() {
+  return clubs;
+}
+
+public void setClubsEventStatus(String clubEventStatus) {
+  this.clubEventStatus = clubEventStatus;
+}
+public String getClubEventStatus() {
+  return clubEventStatus;
+}
+
+public void setClubEventName(String clubEventName) {
+  this.clubEventName = clubEventName;
+}
+public String getClubEventName() {
+  return clubEventName;
+}
+
+
+
+
 
 
 
