@@ -3,20 +3,33 @@ import lombok.*;
 import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="CLUBMEMBER")
+@Table(name="Clubmember")
 public class Clubmember {
 
     @Id
-    @SequenceGenerator(name="CLUBMEMBER_SEQ",sequenceName="CLUBMEMBER_SEQ")               
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CLUBMEMBER_SEQ")  
-    @Column(name = "CLUBMEMBER_ID", unique = true, nullable = true)
+    @SequenceGenerator(name="Clubmember_SEQ",sequenceName="Clubmember_SEQ")               
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Clubmember_SEQ")  
+    @Column(name = "Clubmember_ID", unique = true, nullable = true)
     private @NotNull Long id;
-    private @NotNull String name;
+    @Pattern(regexp = "^[0-9A-Za-zก-์\\s]+$")
+    private @NotNull String ClubmemberName;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Branch.class)
+    @JoinColumn(name = "Branch_ID", insertable = true)
+    private Branch Branch;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Year.class)
+    @JoinColumn(name = "Year_ID", insertable = true)
+    private Year Year;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)
+    @JoinColumn(name = "Club_ID", insertable = true)
+    private Clubs Clubs;
 
     public Long getId() {
         return id;
@@ -27,11 +40,11 @@ public class Clubmember {
     }
 
     public String getName() {
-        return name;
+        return ClubmemberName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.ClubmemberName = name;
     }
 
 }
