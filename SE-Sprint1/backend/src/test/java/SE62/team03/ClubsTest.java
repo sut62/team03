@@ -35,17 +35,15 @@ public class ClubsTest {
     @Test
     void B5827657_tesClubFull() {
         Clubs clubs = new Clubs();
-        clubs.setClubName("ชมรม");
+        clubs.setClubName("ชมรมคอมพิวเตอร์");
         clubs.setClubPresident("นายประธาน ชมรม");
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
-
         clubs = ClubsRepository.saveAndFlush(clubs);
+
         Optional<Clubs> found = ClubsRepository.findById(clubs.getId());
 
-
-
-        assertEquals("ชมรม", found.get().getClubName());
+        assertEquals("ชมรมคอมพิวเตอร์", found.get().getClubName());
         assertEquals("นายประธาน ชมรม", found.get().getClubPresident());
         assertEquals("อาจารย์ที่ปรึกษาชรม", found.get().getAdvisors());
         assertEquals("วัตถุประสงค์ชมรม", found.get().getObjective());
@@ -69,9 +67,9 @@ public class ClubsTest {
     }
 
     @Test
-    void tesClubsIdMustNotBeNull() {
+    void B5827657_tesClubsIdMustNotBeNull() {
         Clubs clubs = new Clubs();
-        clubs.setClubName("ชมรม");
+        clubs.setClubName("ชมรมคอมพิวเตอร์");
         clubs.setClubPresident("นายประธาน ชมรม");
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
@@ -86,9 +84,9 @@ public class ClubsTest {
     }
 
     @Test
-    void tesClubsPresidentMustNotBeNull() {
+    void B5827657_tesClubsPresidentMustNotBeNull() {
         Clubs clubs = new Clubs();
-        clubs.setClubName("ชมรม");
+        clubs.setClubName("ชมรมคอมพิวเตอร์");
         clubs.setClubPresident(null);
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
@@ -103,9 +101,9 @@ public class ClubsTest {
     }
 
     @Test
-    void tesClubsObjectiveMustNotBeNull() {
+    void B5827657_tesClubsObjectiveMustNotBeNull() {
         Clubs clubs = new Clubs();
-        clubs.setClubName("ชมรม");
+        clubs.setClubName("ชมรมคอมพิวเตอร์");
         clubs.setClubPresident("นายประธาน ชมรม");
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective(null);
@@ -120,9 +118,9 @@ public class ClubsTest {
     }
 
     @Test
-    void tesClubsAdvisorsMustNotBeNull() {
+    void B5827657_tesClubsAdvisorsMustNotBeNull() {
         Clubs clubs = new Clubs();
-        clubs.setClubName("ชมรม");
+        clubs.setClubName("ชมรมคอมพิวเตอร์");
         clubs.setClubPresident("นายประธาน ชมรม");
         clubs.setAdvisors(null);
         clubs.setObjective("วัตถุประสงค์ชมรม");
@@ -136,6 +134,54 @@ public class ClubsTest {
         assertEquals("advisors", v.getPropertyPath().toString());
     }
 
+    @Test
+    void B5827657_tesClubsNameMustNotLessThan5() {
+        Clubs clubs = new Clubs();
+        clubs.setClubName("ชมรม");
+        clubs.setClubPresident("นายประธาน ชมรม");
+        clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
+        clubs.setObjective("วัตถุประสงค์ชมรม");
+        clubs.setId(1L);
+        Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
+        assertEquals(1, result.size());
 
+        ConstraintViolation<Clubs> v = result.iterator().next();
+        assertEquals("size must be between 5 and 25", v.getMessage());
+        assertEquals("ClubName", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5827657_tesClubsNameMustNotMoreThan25() {
+        Clubs clubs = new Clubs();
+        clubs.setClubName("ชมรมคอมพิวเตอร์เพื่อการส่งเสริมการเรียนรู้ภาษาคอมพิวเตอร์");
+        clubs.setClubPresident("นายประธาน ชมรม");
+        clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
+        clubs.setObjective("วัตถุประสงค์ชมรม");
+        clubs.setId(1L);
+        Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Clubs> v = result.iterator().next();
+        assertEquals("size must be between 5 and 25", v.getMessage());
+        assertEquals("ClubName", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5827657_tesClubsPresidentMustNotHaveSpecialCharactor() {
+        Clubs clubs = new Clubs();
+        clubs.setClubName("ชมรมคอมพิวเตอร์");
+        clubs.setClubPresident("นายประธานชมรม #%");
+        clubs.setAdvisors("อาจารย์ที่ปรึกษาชมรม");
+        clubs.setObjective("วัตถุประสงค์ชมรม");
+        clubs.setId(1L);
+        Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Clubs> v = result.iterator().next();
+        assertEquals("must match \"^[A-Za-zก-์\\s]+$\"", v.getMessage());
+        assertEquals("ClubPresident", v.getPropertyPath().toString());
+    }
 }

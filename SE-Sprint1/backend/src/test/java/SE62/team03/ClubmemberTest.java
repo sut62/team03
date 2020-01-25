@@ -14,6 +14,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,7 +35,19 @@ public class ClubmemberTest {
     }
 
     @Test
-    void tesBranchNameMustNotBeNull() {
+    void testSaveClubMember() {
+        Clubmember clubmember = new Clubmember();
+        clubmember.setName("Club Member1");
+        clubmember.setId(1L);
+        clubmember = clubmemberRepository.saveAndFlush(clubmember);
+        Optional<Clubmember> result = clubmemberRepository.findById(clubmember.getId());
+
+        assertEquals(1L, result.get().getId());
+        assertEquals("Club Member1", result.get().getName());
+    }
+
+    @Test
+    void testClubmemberNameMustNotBeNull() {
         Clubmember clubmember = new Clubmember();
         clubmember.setName(null);
         clubmember.setId(1L);
@@ -60,5 +73,19 @@ public class ClubmemberTest {
         ConstraintViolation<Clubmember> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("id", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void testClubmemberNameNotHaveSpacialCharactor() {
+        Clubmember clubmember = new Clubmember();
+        clubmember.setName("Menber name @");
+        clubmember.setId(1L);
+        Set<ConstraintViolation<Clubmember>> result = validator.validate(clubmember);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Clubmember> v = result.iterator().next();
+        assertEquals("must match \"^[0-9A-Za-zก-์\\s]+$\"", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
     }
 }
