@@ -7,10 +7,8 @@ import Club from "../components/Club";
 import Booking from "../components/Booking";
 import Budget from "../components/Budget";
 import EquipmentRental from "../components/EquipmentRental";
-import EquipmentRentalData from "../components/EquipmentRentalData";
-import ClubHome from "../components/ClubHome";
-import Clubmember from '../components/Clubmember';
-import Clubmemberview from '../components/Clubmemberview';
+import ClubEventStatusUI from "../components/ClubEventStatusUI";
+import ClubEventHome from "../components/ClubEventHome";
 Vue.use(Router);
 
 export default new Router({
@@ -25,9 +23,9 @@ export default new Router({
     { path: "/Booking", component: Booking },
     { path: "/Budget", component: Budget },
     { path: "/EquipmentRental", component: EquipmentRental },
-    { path: "/viewequipmentrental", component: EquipmentRentalData },
-    { path: "/ClubHome", component: ClubHome },
-    {path: "/Clubmember",component: Clubmember},
-    { path: "/Clubmemberview", component: Clubmemberview },
+    { path: "/ClubEventStatusUI", component: ClubEventStatusUI },
+    { path: "/ClubEventHome", component: ClubEventHome }
+    
   ]
+
 });
