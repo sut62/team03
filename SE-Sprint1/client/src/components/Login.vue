@@ -66,7 +66,7 @@ export default {
       redirect: [
         { path: "/Club" },
         { path: "/Budget" },
-        { path: "/ClubEventUI" },
+        { path: "/ClubEventHome" },
         { path: "/EquipmentRental" },
         { path: "/Booking" }
       ]
