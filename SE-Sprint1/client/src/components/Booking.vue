@@ -68,9 +68,11 @@
               ></v-select>
             </v-col>
           </v-row>
+
           <v-row>
             <v-col cols="10">
               <v-menu
+              
                 ref="menu"
                 v-model="menu"
                 :close-on-content-click="false"
@@ -78,14 +80,19 @@
                 transition="scale-transition"
                 offset-y
                 min-width="290px"
+                full-width 
               >
                 <template v-slot:activator="{ on }">
-                  <v-text-field outlined v-model="date" label="วันที่ทำรายการ" readonly v-on="on"></v-text-field>
+                  <v-text-field outlined v-model="date" label="วันที่ทำรายการ" readonly
+                   v-on="on"></v-text-field>
+                   
                 </template>
-                <v-date-picker v-model="date" no-title scrollable>
+                <v-date-picker v-model="date"  no-title scrollable>
+                
                   <div class="flex-grow-1"></div>
                   <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
                   <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                  
                 </v-date-picker>
               </v-menu>
             </v-col>
@@ -94,6 +101,7 @@
             <v-col cols="12">
               <v-btn @click="savebooking" :class="{ red: !valid, green: valid }">submit</v-btn>
               <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+              <v-btn style="float: right" color="primary" @click="viewData">ดูข้อมูล</v-btn>
             </v-col>
           </v-row>
           <br />
@@ -110,8 +118,8 @@ export default {
   name: "booking",
   data() {
     return {
-      date: new Date().toISOString().substr(0, 10),
-      menu: false,
+      //date: new Date().toISOString().substr(0, 10),
+      //menu: false,
       booking: {
         price: "",
         sitestaff_id: "",
@@ -158,7 +166,7 @@ export default {
     // ดึงข้อมูล Clubmember ใส่ combobox
     getClubmember() {
       http
-        .get("/clubmember")
+        .get("/Clubmember")
         .then(response => {
           this.Clubmember = response.data;
           console.log("Clubmember" + response.data);
@@ -210,20 +218,27 @@ export default {
     },
     clear() {
       this.$refs.form.reset();
+       },
+     viewData() {
+      this.$router.push("/viewbooking")
+    }
     },
     refreshList() {
       this.getSitestaffs();
       this.getClubmember();
       this.getClubs();
       this.getRoom();
-    }
-    /* eslint-enable no-console */
+   
+   
+ 
   },
+  
+  
   mounted() {
     this.getSitestaffs();
     this.getClubmember();
     this.getClubs();
     this.getRoom();
   }
-};
+}
 </script>
