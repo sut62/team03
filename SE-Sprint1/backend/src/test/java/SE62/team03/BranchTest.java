@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import SE62.team03.Entity.Budget;
-import SE62.team03.Repository.BudgetRepository;
+import SE62.team03.Entity.Branch;
+import SE62.team03.Repository.BranchRepository;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -20,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
-public class BudgetTest {
+public class BranchTest {
 
     private Validator validator;
 
     @Autowired
-    BudgetRepository BudgetRepository;
+    BranchRepository branchRepository;
 
     @BeforeEach
     public void setup() {
@@ -34,71 +34,44 @@ public class BudgetTest {
     }
 
     @Test
-    void B5815234_testSaveBudget() {
-        Budget budget = new Budget();
-        budget.setBudgetId(1L);
-        budget.setAmount(2000);
-        budget = BudgetRepository.saveAndFlush(budget);
+    void testSaveBranch() {
+        Branch branch = new Branch();
+        branch.setId(1L);
+        branch.setName("Branch");
+        branch = branchRepository.saveAndFlush(branch);
 
-        Optional<Budget> found = BudgetRepository.findById(budget.getBudgetId());
-        
-        assertEquals(1L, found.get().getBudgetId());
-        assertEquals(2000, found.get().getAmount());
+        Optional<Branch> found = branchRepository.findById(branch.getId());
+
+        assertEquals(1L, found.get().getId());
+        assertEquals("Branch", found.get().getName());
     }
 
     @Test
-    void B5815234_testBudgetIdMustNotBeNull() {
-        Budget budget = new Budget();
-        budget.setAmount(2000);
-        budget.setBudgetId(null);
-        Set<ConstraintViolation<Budget>> result = validator.validate(budget);
-        
+    void tesBranchNameMustNotBeNull() {
+        Branch branch = new Branch();
+        branch.setName(null);
+        branch.setId(1L);
+        Set<ConstraintViolation<Branch>> result = validator.validate(branch);
+
         assertEquals(1, result.size());
-        
-        ConstraintViolation<Budget> v = result.iterator().next();
+
+        ConstraintViolation<Branch> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("budgetId", v.getPropertyPath().toString());
+        assertEquals("name", v.getPropertyPath().toString());
     }
 
     @Test
-    void B5815234_testAmountMustNotBeNull() {
-        Budget budget = new Budget();
-        budget.setAmount(null);
-        budget.setBudgetId(1L);
-        Set<ConstraintViolation<Budget>> result = validator.validate(budget);
-        
+    void testBranchIdMustNotBeNull() {
+        Branch branch = new Branch();
+        branch.setName("Branch name");
+        branch.setId(null);
+
+        Set<ConstraintViolation<Branch>> result = validator.validate(branch);
+
         assertEquals(1, result.size());
 
-        ConstraintViolation<Budget> v = result.iterator().next();
+        ConstraintViolation<Branch> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("amount", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5815234_testAmountMustNotBeLessThan0() {
-        Budget budget = new Budget();
-        budget.setAmount(-1);
-        budget.setBudgetId(1L);
-        Set<ConstraintViolation<Budget>> result = validator.validate(budget);
-        
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Budget> v = result.iterator().next();
-        assertEquals("must be greater than or equal to 0", v.getMessage());
-        assertEquals("amount", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5815234_testAmountMustNotBeMoreThan100000() {
-        Budget budget = new Budget();
-        budget.setAmount(100001);
-        budget.setBudgetId(1L);
-        Set<ConstraintViolation<Budget>> result = validator.validate(budget);
-        
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Budget> v = result.iterator().next();
-        assertEquals("must be less than or equal to 100000", v.getMessage());
-        assertEquals("amount", v.getPropertyPath().toString());
+        assertEquals("id", v.getPropertyPath().toString());
     }
 }
