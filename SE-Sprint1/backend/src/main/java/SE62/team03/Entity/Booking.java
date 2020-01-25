@@ -1,26 +1,25 @@
 package SE62.team03.Entity;
+
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.*;
 
-
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="BOOKING")
+@Table(name = "BOOKING")
 public class Booking {
 
     @Id
-    @SequenceGenerator(name="booking_seq",sequenceName="booking_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="booking_seq")
-    @Column(name = "BOOKING_ID", unique = true, nullable = true)
+    @SequenceGenerator(name = "booking_seq", sequenceName = "booking_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_seq")
+    @Column(name = "BOOKING_ID", unique = true)
     private @NotNull Long id;
-  
 
-    @Column(name="BOOKING_DATE")
-    private @NotNull Date bookingDate;
+    @Column(name = "BOOKING_DATE")
+    private @NotNull String bookingDate;//
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sitestaff.class)
     @JoinColumn(name = "SITESTAFF_ID", insertable = true)
@@ -46,11 +45,11 @@ public class Booking {
         this.id = id;
     }
 
-    public Date getBookingDate() {
+    public String getBookingDate() {//
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(String bookingDate) {//
         this.bookingDate = bookingDate;
     }
 
@@ -74,7 +73,7 @@ public class Booking {
         return bookingClub;
     }
 
-    public void setPaymentClub(Clubs bookingClub) {
+    public void setBookingClub(Clubs bookingClub) {
         this.bookingClub = bookingClub;
     }
 
@@ -86,8 +85,4 @@ public class Booking {
         this.type = type;
     }
 
-   
-
-
-	
 }
