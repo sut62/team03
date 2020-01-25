@@ -34,6 +34,19 @@ public class BranchTest {
     }
 
     @Test
+    void testSaveBranch() {
+        Branch branch = new Branch();
+        branch.setId(1L);
+        branch.setName("Branch");
+        branch = branchRepository.saveAndFlush(branch);
+
+        Optional<Branch> found = branchRepository.findById(branch.getId());
+
+        assertEquals(1L, found.get().getId());
+        assertEquals("Branch", found.get().getName());
+    }
+
+    @Test
     void tesBranchNameMustNotBeNull() {
         Branch branch = new Branch();
         branch.setName(null);

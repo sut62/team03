@@ -34,7 +34,20 @@ public class YearTest {
     }
 
     @Test
-    void tesYearNameMustNotBeNull() {
+    void testSaveYear() {
+        Year year = new Year();
+        year.setName("Year name");
+        year.setId(1L);
+        year = yearRepository.saveAndFlush(year);
+
+        Optional<Year> result = yearRepository.findById(year.getId());
+
+        assertEquals(1L, result.get().getId());
+        assertEquals("Year name", result.get().getName());
+    }
+
+    @Test
+    void testYearNameMustNotBeNull() {
         Year year = new Year();
         year.setName(null);
         year.setId(1L);
