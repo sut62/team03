@@ -11,7 +11,7 @@
       <v-col cols="4">
         <v-form v-model="valid" ref="form">
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Clubs"
                 outlined
@@ -25,7 +25,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-text-field
                 label="Renter name"
                 v-model="equipmentRental.renter_name"
@@ -36,7 +36,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Equipment"
                 outlined
@@ -50,7 +50,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Officer name"
                 outlined
@@ -63,7 +63,7 @@
           </v-row>
 
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-textarea v-model="equipmentRental.note" auto-grow outlined label="Note" rows="3"></v-textarea>
             </v-col>
           </v-row>
@@ -71,6 +71,7 @@
             <v-col cols="12">
               <v-btn @click="saveEquipmentRental" :class="{ red: !valid, green: valid }">Save</v-btn>
               <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
+              <v-btn style="float: right" color="primary" @click="viewData">ดูข้อมูล</v-btn>
             </v-col>
           </v-row>
           <br />
@@ -157,12 +158,12 @@ export default {
           this.equipmentRental
         )
         .then(() => {
+          alert("บันทึกข้อมูลสำเร็จ")
           this.equipmentRental.club_id = ""
           this.equipmentRental.officer_id = ""
           this.equipmentRental.equipment_id = ""
           this.equipmentRental.note = ""
           this.equipmentRental.renter_name = ""
-          this.$router.push("/view")
         })
         .catch(e => {
           console.log(e)
@@ -176,6 +177,9 @@ export default {
       this.getClubs()
       this.getOfficer()
       this.getEquipments()
+    },
+    viewData() {
+      this.$router.push("/viewequipmentrental")
     }
     /* eslint-enable no-console */
   },
