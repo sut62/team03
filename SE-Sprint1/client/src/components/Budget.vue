@@ -167,7 +167,7 @@ export default {
     // ดึงข้อมูล Clubmember ใส่ combobox
     getClubmember() {
       http
-        .get("/clubmember")
+        .get("/Clubmember")
         .then(response => {
           this.Clubmember = response.data;
           console.log("Clubmember" + response.data);
