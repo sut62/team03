@@ -64,7 +64,7 @@ export default {
       user: "",
       pass: "",
       redirect: [
-        { path: "/Club" },
+        { path: "/ClubHome" },
         { path: "/Budget" },
         { path: "/ClubEventHome" },
         { path: "/EquipmentRental" },
