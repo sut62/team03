@@ -11,7 +11,7 @@
       <v-col cols="4">
         <v-form v-model="valid" ref="form">
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Club"
                 outlined
@@ -26,7 +26,7 @@
           </v-row>
 
           <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Club Type"
                 outlined
@@ -43,13 +43,13 @@
        
 
            <v-row>
-            <v-col cols="12" sm="10" md="10">
+            <v-col cols="12" sm="12" md="12">
               <v-text-field label="Budget" v-model="amount" outlined></v-text-field>
             </v-col>
           </v-row>
      
             <v-row>
-            <v-col cols="10">
+            <v-col cols="12">
               <v-select
                 label="Member Name"
                 outlined
