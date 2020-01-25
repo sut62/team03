@@ -2,7 +2,13 @@ package SE62.team03.Entity;
 
 import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -15,58 +21,34 @@ public class ClubEvent {
   @Column(name="ClubEvent_ID",unique = true, nullable = true)
 
   private @NotNull Long clubEventID;
-  private @NotNull String clubEventName;
-  private @NotNull String clubEventDate;
-  private @NotNull String clubHost;
-  private @NotNull Long clubEventPepleAmount;
-  String clubEventStatus;
+  @Size(min = 5, max = 50)
+  @Pattern(regexp = "^[0-9A-Za-zก-์\\s]+$")
+  private @NotNull String ClubEventName;
+  private @NotNull String ClubEventDate;
+  private @NotNull String ClubHost;
+  private @NotNull String ClubEventStatus;
+
+  private 
+  @Min(1)
+  @Max(1000)
+  @NotNull Long ClubEventPepleAmount;
   
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)
   @JoinColumn(name = "Clubs_ID", insertable = true)
-  private Clubs clubs;
+  @Getter @Setter private Clubs clubs;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Officer.class)
   @JoinColumn(name = "Officer_ID", insertable = true)
-  private Officer officer;
+  @Getter @Setter private Officer officer;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Location.class)
   @JoinColumn(name = "Location_ID", insertable = true)
-  private Location location;
+  @Getter @Setter private Location location;
 
-  public Officer getOfficer() {
-    return this.officer;
+  public Long getId() {
+    return clubEventID;
 }
-
-public void setOfficer(Officer officer) {
-    this.officer = officer;
-
-}
-
-public void setClubs(Clubs clubs) {
-  this.clubs = clubs;
-}
-public Clubs getClubs() {
-  return clubs;
-}
-
-public void setClubsEventStatus(String clubEventStatus) {
-  this.clubEventStatus = clubEventStatus;
-}
-public String getClubEventStatus() {
-  return clubEventStatus;
-}
-
-public void setClubEventName(String clubEventName) {
-  this.clubEventName = clubEventName;
-}
-public String getClubEventName() {
-  return clubEventName;
-}
-
-
-
-
 
 
 

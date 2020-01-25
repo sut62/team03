@@ -33,7 +33,20 @@ public class LocationTest {
     }
 
     @Test
-    void tesLocationNameMustNotBeNull() {
+    void B5823475_testCreateLocation() {
+        Location location = new Location();
+        location.setName("อาคารสุรเริงชัย");
+        location.setId(1L);
+        location = locationRepository.saveAndFlush(location);
+
+        Optional<Location> result = locationRepository.findById(location.getId());
+
+        assertEquals(1L, result.get().getId());
+        assertEquals("อาคารสุรเริงชัย", result.get().getName());
+    }
+
+    @Test
+    void B5823475_testLocationNameMustNotBeNull() {
         Location location = new Location();
         location.setName(null);
         location.setId(1L);
@@ -62,12 +75,26 @@ public class LocationTest {
     }
 
     @Test
-    void B5823475_testLocationNameDigitMin4Max30() {
+    void B5823475_testLocationNameNotLessThan4() {
         Location location = new Location();
         location.setName("ABC");
         location.setId(1L);
         Set<ConstraintViolation<Location>> result = validator.validate(location);
         assertEquals(1, result.size());
+
+        ConstraintViolation<Location> v = result.iterator().next();
+        assertEquals("size must be between 4 and 30", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5823475_testLocationNameNotMoreThan30() {
+        Location location = new Location();
+        location.setName("อาคารสุรเริงชัย อาคารบริหาร อาคารเรัียนรวมสอง");
+        location.setId(1L);
+        Set<ConstraintViolation<Location>> result = validator.validate(location);
+        assertEquals(1, result.size());
+        
         ConstraintViolation<Location> v = result.iterator().next();
         assertEquals("size must be between 4 and 30", v.getMessage());
         assertEquals("name", v.getPropertyPath().toString());

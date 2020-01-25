@@ -80,7 +80,7 @@ export default {
         .then(response => {
           // eslint-disable-next-line no-console
           console.log(response)
-          if (response) {
+          if (response.data) {
             this.$router.push(this.redirect[response.data.officerStatus - 1].path)
           } else {
             alert("ไม่ถูกต้อง")

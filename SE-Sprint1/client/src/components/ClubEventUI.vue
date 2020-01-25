@@ -73,6 +73,11 @@
 
         <!-- ชื่อกิจกรรม -->
         <v-row>
+          <!-- <md-field>
+        <label for="snackbar-duration">Miliseconds</label>
+        <md-input type="number" id="snackbar-duration" v-model.number="duration" :disabled="isInfinity"></md-input>
+        </md-field> -->
+
         <v-text-field
           v-model="ClubEvent.ClubEventPepleAmount"
           label="จำนวนผู้เข้าร่วม"

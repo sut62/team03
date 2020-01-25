@@ -1,72 +1,61 @@
 <template>
   <v-container>
-
     <v-card-title class="text-center justify-center py-6">
-      <h3 class="font-weight-bold  basil--text">ระบบอนุมัติการจัดกิจกรรมชมรม</h3>
+      <h3 class="font-weight-bold basil--text">ระบบอนุมัติการจัดกิจกรรมชมรม</h3>
     </v-card-title>
 
     <v-row justify="center">
-      <v-col cols="4">
+      <v-col cols="6">
         <v-form v-model="valid" ref="form">
-
-            <!-- เลือกชมรมที่ต้องการอนุมัติ -->
-      <v-row>
-              <v-col cols="10">
-                <v-select
-                  label="เลือกกิจกรรม"
-                  outlined
-                  v-model="ClubEvents"
-                  :items="ClubEvent"
-                  item-text="clubEventName"
-                  item-value="id"     
-                  :rules="[(v) => !!v || 'กรุณาเลือก กิจกรรม']"
-                  required
-                >
-                <!-- อยากเเสดงClubEventName เวลาเลือก-->
-                </v-select>
-                </v-col>
-          </v-row> 
-
           <v-row>
-                <v-text-field
-                    v-model="ClubEvents"
-                    :items="ClubEvent"
-                    item-text="clubEventID" 
-                    item-value="id"
-                    style="width: 125px"
-                    required
-                ></v-text-field>
-            </v-row>
-                        
-<v-card class="mx-auto" max-width="500">
-    <v-list>
-      <v-list-item-group v-model="ClubEvents">
-        <v-list-item v-for="(item, i) in items" :key="i">
-          <v-list-item-content>
-            <v-list-item-title v-text="item.text"></v-list-item-title>
-          </v-list-item-content>
+            <v-col cols="10">
+              <v-select
+                label="เลือกกิจกรรม"
+                outlined
+                v-model="ClubEventID"
+                :items="ClubEvent"
+                item-text="clubEventName"
+                item-value="clubEventID"
+                :rules="[(v) => !!v || 'กรุณาเลือก กิจกรรม']"
+                required
+                @change="selectClubEvent"
+              ></v-select>
+            </v-col>
+          </v-row>
 
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-card>
+          <v-row v-if="isSelected">
+            <v-col cols="10">
+              <v-card class="mx-auto" max-width="400">
+                <v-card-title>{{clubName}}</v-card-title>
+                <v-card-text class="text--primary">
+                  <div>ชื่อกิจกรรม : {{clubEventName}}</div>
+                  <div>จัดวันที่ : {{clubEventDate}}</div>
+                  <div>จำนวนผู้เข้าร่วม : {{clubEventPepleAmount}}</div>
+                  <div>สถานะ : {{clubEventStatus}}</div>
+                  <div>สถานที่จัดกิจกรรม : {{location}}</div>
+                  <div>ผู้ขอจัดกิจกรรม : {{clubHost}}</div>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
 
-        <!--ปุ่มกด--> 
-        <div>
+          <!--ปุ่มกด-->
+          <div>
             <v-row justify="center">
               <v-col cols="12">
-                <v-btn @click="save" :class="{ red: !valid, green: valid }">อนุมัติ</v-btn>
-                 <v-btn style="margin-left: 15px;" @click="clear">ยกเลิกกิจกรรม</v-btn>
+                <v-btn @click="approve" :class="{ red: !valid, green: valid }">อนุมัติ</v-btn>
+                <v-btn style="margin-left: 15px;" @click="cancel">ยกเลิกกิจกรรม</v-btn>
               </v-col>
             </v-row>
-        </div>
-            <v-bottom-navigation :value="activeBtn" color="deep-purple accent-4">
-            <v-btn >
-              <span><router-link to="/Login"> logOut </router-link></span>
+          </div>
+          <v-bottom-navigation color="deep-purple accent-4">
+            <v-btn>
+              <span>
+                <router-link to="/Login">logOut</router-link>
+              </span>
             </v-btn>
-      </v-bottom-navigation>         
-            <br />
-         
+          </v-bottom-navigation>
+          <br />
         </v-form>
       </v-col>
     </v-row>
@@ -74,105 +63,124 @@
 </template>
 
 <script>
-import http from "../http-common";
+import http from "../http-common"
 
 export default {
   name: "ClubEvent",
   data() {
     return {
       ClubEvent: [],
-      items: [
-        {
-          text: 'clubEventName',
-        },
-        {
-          text: 'clubs',
-        },
-        {
-          text: 'location',
-        },
-        {
-          text: 'officer',
-        },
-      ],
-      valid: false  
-    };
+      ClubEventID: "",
+      valid: false,
+      clubName: "",
+      clubEventName: "",
+      clubEventPepleAmount: "",
+      clubEventStatus: "",
+      clubEventDate: "",
+      location: "",
+      clubHost: "",
+      isSelected: false
+    }
   },
-// ดึงข้อมูลจาก ClubEvent ที่เลือกมาเเสดง
-   
+  // ดึงข้อมูลจาก ClubEvent ที่เลือกมาเเสดง
+
   methods: {
     /* eslint-disable no-console */
-
+    selectClubEvent() {
+      this.ClubEvent.forEach(clubEvent => {
+        if (clubEvent.clubEventID === this.ClubEventID) {
+          this.clubName = clubEvent.clubs.clubName
+          this.clubEventName = clubEvent.clubEventName
+          this.clubEventPepleAmount = clubEvent.clubEventPepleAmount
+          this.clubEventStatus = clubEvent.clubEventStatus
+          this.location = clubEvent.location.name
+          this.clubEventDate = clubEvent.clubEventDate
+          this.clubHost = clubEvent.clubHost
+          this.isSelected = true
+        }
+      })
+    },
     // ดึงข้อมูล ClubEvent ใส่ combobox
     getClubEvent() {
       http
         .get("/ClubEvent")
         .then(response => {
-          this.ClubEvent = response.data;
-          console.log(response.data);
+          this.ClubEvent = response.data
+          console.log(response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-  
-    
+    cancel() {
+      if (this.clubEventID === "") {
+        alert("กรุณาเลือกกิจกรรม")
+      } else {
+        http
+          .delete("/disapprove/" + this.ClubEventID, this.ClubEventID)
+          .then(response => {
+            if (response.data) {
+              alert("ไม่สามารถยกเลิกกิจกรรม")
+            } else {
+              alert("ยกเลิกกิจกรรมสำเร็จ")
+              this.getClubEvent()
+            }
+          })
+          .catch(() => {
+            alert("ไม่สามารถยกเลิกกิจกรรม")
+          })
+        this.ClubEventID = ""
+        this.clubName = ""
+        this.clubEventName = ""
+        this.clubEventPepleAmount = ""
+        this.clubEventStatus = ""
+        this.location = ""
+        this.clubEventDate = ""
+        this.clubHost = ""
+        this.isSelected = ""
+      }
+    },
     // เมื่อกดปุ่ม อนุมัติ ให้ update กิจกรรมที่เลือก ตรง ClubEventStatus จาก รออนุมัติเป็นอนุมัติ
-    save() {
-      http
-        .post(
-          "/ClubEvent/" +
-            this.ClubEvent.ClubsID +
-            "/" +
-            this.ClubEvent.ClubEventName +
-            "/" +
-            this.ClubEvent.LocationID +
-            "/"+
-            this.ClubEvent.ClubEventDate +
-            "/"+
-            this.ClubEvent.ClubEventPepleAmount +
-            "/"+
-            this.ClubEvent.ClubsHost +
-            "/"+
-            this.ClubEvent.OfficerID,
-        this.ClubEvent
-        )
-        .then(response => {
-          console.log(response.data);
-          this.ClubEvent.ClubsID = "";
-          this.ClubEvent.ClubEventName = "";
-          this.ClubEvent.LocationID = "";
-          this.ClubEvent.ClubEventDate = "";
-          this.ClubEvent.ClubEventPepleAmount = "";
-          this.ClubEvent.ClubsHost = "";
-          this.ClubEvent.OfficerID = "";
-          if (response) {
-            this.$refs.form.reset();
-            alert("อนุมัติสำเร็จ");
-          }
-          // this.$router.push("/view");
-        })
-        .catch(e => {
-          console.log(e);
-        });
-      this.submitted = true;
+    approve() {
+      if (this.clubEventID === "") {
+        alert("กรุณาเลือกกิจกรรม")
+      } else {
+        http
+          .post("/approveevent/" + this.ClubEventID, this.ClubEvent)
+          .then(response => {
+            this.ClubEventID = ""
+            this.clubName = ""
+            this.clubEventName = ""
+            this.clubEventPepleAmount = ""
+            this.clubEventStatus = ""
+            this.location = ""
+            this.clubEventDate = ""
+            this.clubHost = ""
+            this.isSelected = ""
+            if (response.data) {
+              alert("อนุมัติสำเร็จ")
+            }
+            // this.$router.push("/view");
+          })
+          .catch(e => {
+            console.log(e)
+          })
+        this.submitted = true
+      }
     },
 
     // เมื่อกดปุ่ม ยกเลิกกิจกรรม ให้ ลบ กิจกรรม
     clear() {
-      this.$refs.form.reset();
-      
+      this.$refs.form.reset()
     },
 
     refreshList() {
-      this.getClubEvent();
-
-     
+      this.getClubEvent()
     }
     /* eslint-enable no-console */
   },
   mounted() {
-    this.getClubEvent(); 
+    this.getClubEvent()
   }
-};
+}
 </script>

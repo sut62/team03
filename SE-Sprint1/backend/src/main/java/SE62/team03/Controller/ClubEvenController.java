@@ -19,13 +19,15 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
-
+import lombok.Getter;
+import lombok.Setter;
 import SE62.team03.Repository.*;
 import SE62.team03.Entity.*;
 
 
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -56,7 +58,7 @@ public class ClubEvenController {
     @PathVariable String ClubEventDate,
     @PathVariable long ClubEventPepleAmount,
     @PathVariable String ClubHost,
-    @PathVariable long OfficerID) {
+    @PathVariable long OfficerID){
 
 
     ClubEvent newClubEvent = new ClubEvent();
@@ -71,9 +73,28 @@ public class ClubEvenController {
     newClubEvent.setClubEventPepleAmount(ClubEventPepleAmount);
     newClubEvent.setClubHost(ClubHost);
     newClubEvent.setOfficer(officer);
-    newClubEvent.setClubsEventStatus("รออนุมัติ");
+    newClubEvent.setClubEventStatus("รออนุมัติ");
     
     return ClubEventRepository.save(newClubEvent); //บันทึก Objcet 
     
+    }
+
+    @PostMapping("/approveevent/{clubeventId}")
+    public ClubEvent approveClubEvent(@PathVariable long clubeventId) {
+        ClubEvent clubEvent = ClubEventRepository.findById(clubeventId);
+        clubEvent.setClubEventStatus("อนุมัติ");
+        return ClubEventRepository.save(clubEvent);
+    }
+
+    @DeleteMapping("/disapprove/{clubeventId}")
+    public Boolean disApproveClubEvent(@PathVariable long clubeventId) {
+        System.out.println("Doing");
+        ClubEventRepository.deleteById(clubeventId);
+        ClubEvent clubEvent = ClubEventRepository.findById(clubeventId);
+        System.out.println(clubEvent);
+        if(clubEvent != null) {
+            return true;
+        }
+        return false;
     }
 }

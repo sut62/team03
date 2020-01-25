@@ -34,6 +34,27 @@ public class ClubEventTest {
     }
 
     @Test
+    void testSaveClubEvent() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("กิจกรรม");
+        clubEvent.setClubEventDate("10-01-2020");
+        clubEvent.setClubEventPepleAmount(60L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
+        clubEvent = ClubEventRepository.saveAndFlush(clubEvent);
+
+        Optional<ClubEvent> ClubEvent = ClubEventRepository.findById(clubEvent.getClubEventID());
+
+        assertEquals(1L, ClubEvent.get().getClubEventID());
+        assertEquals("กิจกรรม", ClubEvent.get().getClubEventName());
+        assertEquals("10-01-2020", ClubEvent.get().getClubEventDate());
+        assertEquals(60L, ClubEvent.get().getClubEventPepleAmount());
+        assertEquals("Host", ClubEvent.get().getClubHost());
+        assertEquals("รอการอนุมัติ", ClubEvent.get().getClubEventStatus());
+    }
+
+    @Test
     void testClubEventIdMustNotBeNull() {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(null);
@@ -41,25 +62,12 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventDate("10-01-2020");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("clubEventID", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5823475_testClubEvent() {
-        ClubEvent clubEvent = new ClubEvent();
-        clubEvent.setClubEventID(1L);
-        clubEvent.setClubEventName("โครงการ");
-        clubEvent.setClubEventPepleAmount(60L);
-        clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("10-01-2020");
-        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
-
-        Optional<ClubEvent> found = ClubEventRepository.findById(clubEvent.getId());
-        //assertEquals("1L", found.get().getId());
     }
 
     @Test
@@ -70,6 +78,7 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventDate("10-01-2020");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -85,6 +94,7 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost(null);
         clubEvent.setClubEventDate("10-01-2020");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -100,6 +110,7 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventDate(null);
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -113,6 +124,7 @@ public class ClubEventTest {
         clubEvent.setClubEventID(1L);
         clubEvent.setClubEventName("โครงการ");
         clubEvent.setClubEventPepleAmount(null);
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventDate("10-01-2020");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
@@ -122,23 +134,104 @@ public class ClubEventTest {
         assertEquals("ClubEventPepleAmount", v.getPropertyPath().toString());
     }
 
-    // @Test
-    // void B5823475testClubEventPepleAmountSize1to3() {
-    //     ClubEvent clubEvent = new ClubEvent();
-    //     clubEvent.setClubEventID(1L);
-    //     clubEvent.setClubEventName("AAAAA");
-    //     clubEvent.setClubEventPepleAmount(1000L);
-    //     clubEvent.setClubHost("Host");
-    //     clubEvent.setClubEventDate("10-01-2020");
-    //     Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+    @Test
+    void B5823475_testClubEventPepleAmountNotLessThan1() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("AAAAA");
+        clubEvent.setClubEventPepleAmount(0L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
+        clubEvent.setClubEventDate("10-01-2020");
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
-    //     assertEquals(1, result.size());
+        assertEquals(1, result.size());
 
-    //     ConstraintViolation<ClubEvent> v = result.iterator().next();
-    //     assertEquals("size must be between 1 and 3", v.getMessage());
-    //     assertEquals("ClubEventPepleAmount", v.getPropertyPath().toString());
-    // }
+        ConstraintViolation<ClubEvent> v = result.iterator().next();
+        assertEquals("must be greater than or equal to 1", v.getMessage());
+        assertEquals("ClubEventPepleAmount", v.getPropertyPath().toString());
+    }
 
+    @Test
+    void B5823475_testClubEventPepleAmountNotMoreThan1000() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("AAAAA");
+        clubEvent.setClubEventPepleAmount(10001L);
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventDate("10-01-2020");
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
-    
+        assertEquals(1, result.size());
+
+        ConstraintViolation<ClubEvent> v = result.iterator().next();
+        assertEquals("must be less than or equal to 1000", v.getMessage());
+        assertEquals("ClubEventPepleAmount", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void tesClubEventNameMustNotLessThan5() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("โครง");
+        clubEvent.setClubEventPepleAmount(60L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
+        clubEvent.setClubEventDate("10-01-2020");
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+        assertEquals(1, result.size());
+        ConstraintViolation<ClubEvent> v = result.iterator().next();
+        assertEquals("size must be between 5 and 50", v.getMessage());
+        assertEquals("ClubEventName", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void tesClubEventNameMustNotMoreThan50() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName(
+                "โครงการค่ายจาวา เตรียมน้องเพื่อพร้อมกับการเรียนรู้ภาษาจาวา และการนำไปประยุกต์ใช้ในชีวิตประจำวัน");
+        clubEvent.setClubEventPepleAmount(60L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
+        clubEvent.setClubEventDate("10-01-2020");
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+        assertEquals(1, result.size());
+        ConstraintViolation<ClubEvent> v = result.iterator().next();
+        assertEquals("size must be between 5 and 50", v.getMessage());
+        assertEquals("ClubEventName", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void tesClubEventNameMustNotEnterSpecialCharactor() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("โครงการ@#% ครั้งที่ 2");
+        clubEvent.setClubEventPepleAmount(60L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventStatus("รอการอนุมัติ");
+        clubEvent.setClubEventDate("10-01-2020");
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+        assertEquals(1, result.size());
+        ConstraintViolation<ClubEvent> v = result.iterator().next();
+        assertEquals("must match \"^[0-9A-Za-zก-์\\s]+$\"", v.getMessage());
+        assertEquals("ClubEventName", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void testClubEventStatusMustNotBeNull() {
+        ClubEvent clubEvent = new ClubEvent();
+        clubEvent.setClubEventID(1L);
+        clubEvent.setClubEventName("โครงการ");
+        clubEvent.setClubEventPepleAmount(60L);
+        clubEvent.setClubHost("Host");
+        clubEvent.setClubEventDate("10-01-2020");
+        clubEvent.setClubEventStatus(null);
+        Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
+        assertEquals(1, result.size());
+        ConstraintViolation<ClubEvent> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("ClubEventStatus", v.getPropertyPath().toString());
+    }
 }
