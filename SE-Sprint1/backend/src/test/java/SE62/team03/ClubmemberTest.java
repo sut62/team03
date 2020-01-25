@@ -88,4 +88,32 @@ public class ClubmemberTest {
         assertEquals("must match \"^[0-9A-Za-zก-์\\s]+$\"", v.getMessage());
         assertEquals("name", v.getPropertyPath().toString());
     }
+
+    @Test
+    void testClubmemberNameNotLessThan3() {
+        Clubmember clubmember = new Clubmember();
+        clubmember.setName("Me");
+        clubmember.setId(1L);
+        Set<ConstraintViolation<Clubmember>> result = validator.validate(clubmember);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Clubmember> v = result.iterator().next();
+        assertEquals("size must be between 3 and 30", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void testClubmemberNameNotMoreThan30() {
+        Clubmember clubmember = new Clubmember();
+        clubmember.setName("Member name must not more than 30");
+        clubmember.setId(1L);
+        Set<ConstraintViolation<Clubmember>> result = validator.validate(clubmember);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Clubmember> v = result.iterator().next();
+        assertEquals("size must be between 3 and 30", v.getMessage());
+        assertEquals("name", v.getPropertyPath().toString());
+    }
 }

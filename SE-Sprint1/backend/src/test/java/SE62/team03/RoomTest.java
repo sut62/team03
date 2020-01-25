@@ -34,7 +34,7 @@ public class RoomTest {
     }
 
     @Test
-    void testSaveRoom() {
+    void B5815029_testSaveRoom() {
         Room room = new Room();
         room.setName("RoomName");
         room.setId(1L);
@@ -47,7 +47,7 @@ public class RoomTest {
     }
 
     @Test
-    void tesRoomNameMustNotBeNull() {
+    void B5815029_tesRoomNameMustNotBeNull() {
         Room room = new Room();
         room.setName(null);
         room.setId(1L);
@@ -61,7 +61,7 @@ public class RoomTest {
     }
 
     @Test
-    void testRoomIdMustNotBeNull() {
+    void B5815029_testRoomIdMustNotBeNull() {
         Room room = new Room();
         room.setName("RoomName");
         room.setId(null);
@@ -76,7 +76,7 @@ public class RoomTest {
     }
 
     @Test
-    void tesRoomNameMustEnterOnlyNumberAndAlpha() {
+    void B5815029_tesRoomNameMustEnterOnlyNumberAndAlpha() {
         Room room = new Room();
         room.setName("Room1@");
         room.setId(1L);
@@ -90,7 +90,7 @@ public class RoomTest {
     }
     
     @Test
-    void tesRoomNameMustNotLessThan4() {
+    void B5815029_tesRoomNameMustNotLessThan4() {
         Room room = new Room();
         room.setName("Roo");
         room.setId(1L);
@@ -104,7 +104,7 @@ public class RoomTest {
     }
 
     @Test
-    void tesRoomNameMustNotMoreThan10() {
+    void B5815029_tesRoomNameMustNotMoreThan10() {
         Room room = new Room();
         room.setName("Room name number 1");
         room.setId(1L);

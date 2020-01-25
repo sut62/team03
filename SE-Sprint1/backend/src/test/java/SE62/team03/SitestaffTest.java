@@ -34,7 +34,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void testSaveSitestaff() {
+    void B5815029_testSaveSitestaff() {
         Sitestaff sitestaff = new Sitestaff();
         sitestaff.setName("Sitestaff Name");
         sitestaff.setId(1L);
@@ -47,7 +47,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void tesSitestaffNameMustNotBeNull() {
+    void B5815029_tesSitestaffNameMustNotBeNull() {
         Sitestaff sitestaff = new Sitestaff();
         sitestaff.setName(null);
         sitestaff.setId(1L);
@@ -61,7 +61,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void testSitestaffIdMustNotBeNull() {
+    void B5815029_testSitestaffIdMustNotBeNull() {
         Sitestaff sitestaff = new Sitestaff();
         sitestaff.setName("Sitestaff Name");
         sitestaff.setId(null);
@@ -76,7 +76,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void tesSitestaffNameMustNotLessThan5() {
+    void B5815029_tesSitestaffNameMustNotLessThan5() {
         Sitestaff Sitestaff = new Sitestaff();
         Sitestaff.setName("staf");
         Sitestaff.setId(1L);
@@ -90,7 +90,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void tesSitestaffNameMustNotMoreThan15() {
+    void B5815029_tesSitestaffNameMustNotMoreThan15() {
         Sitestaff Sitestaff = new Sitestaff();
         Sitestaff.setName("site staff should not more than 15");
         Sitestaff.setId(1L);
@@ -104,7 +104,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void tesSitestaffNameCanEnterAlphaNumberSpace() {
+    void B5815029_tesSitestaffNameCanEnterAlphaNumberSpace() {
         Sitestaff Sitestaff = new Sitestaff();
         Sitestaff.setName("shouldn't $");
         Sitestaff.setId(1L);
