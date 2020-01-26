@@ -32,7 +32,8 @@ public class Team03Application {
 
 
 // ================================= สร้าง Object Location ===============================================
-			    Stream.of("aaaaaaaaa", "bbbbbbbb", "cccccccccccc", "nnnnnnnnnnnn").forEach(name -> {
+				Stream.of("เรียนรวม1", "เรียนรวม2", "สุรพัท1", "สุรพัท2","ลานหมอลำ","สนาม1","สนาม2","สนาม3"
+				).forEach(name -> {
 				Location Location = new Location(); // สร้าง Object 
 				Location.setName(name); // set ชื่อ (name) ให้ Object ชื่อ 
 				LocationRepository.save(Location); // บันทึก Objcet ชื่อ 
@@ -41,38 +42,54 @@ public class Team03Application {
 // ================================= สร้าง Object Officer ===============================================
 				Officer Officer = new Officer(); // สร้าง Object 
 				Officer.setName("เจ้าหน้าที่ฝ่ายบุคคล"); // set ชื่อ (name) ให้ Object ชื่อ 			
-				Officer.setUsername("11111");
+				Officer.setUsername("10001");
 				Officer.setPassword("1234");
 				Officer.setOfficerStatus((long)1);
 				OfficerRepository.save(Officer); // บันทึก Objcet ชื่อ
 
 				Officer Officer2 = new Officer(); // สร้าง Object 
 				Officer2.setName("เจ้าหน้าที่การเงิน"); // set ชื่อ (name) ให้ Object ชื่อ 				
-				Officer2.setUsername("22222");
+				Officer2.setUsername("20001");
 				Officer2.setPassword("1234");
 				Officer2.setOfficerStatus((long)2);
 				OfficerRepository.save(Officer2); // บันทึก Objcet ชื่อ 
 
 				Officer Officer3 = new Officer(); // สร้าง Object 
 				Officer3.setName("เจ้าหน้าที่จัดกิจกรรมชมรม"); // set ชื่อ (name) ให้ Object ชื่อ 				
-				Officer3.setUsername("33333");
+				Officer3.setUsername("30001");
 				Officer3.setPassword("1234");
 				Officer3.setOfficerStatus((long)3);
 				OfficerRepository.save(Officer3); // บันทึก Objcet ชื่อ 
 
+				Officer Officer6 = new Officer(); // สร้าง Object 
+				Officer6.setName("เจ้าหน้าที่จัดกิจกรรมชมรม2"); // set ชื่อ (name) ให้ Object ชื่อ 				
+				Officer6.setUsername("30002");
+				Officer6.setPassword("1234");
+				Officer6.setOfficerStatus((long)3);
+				OfficerRepository.save(Officer6); // บันทึก Objcet ชื่อ 
+
+				Officer Officer7 = new Officer(); // สร้าง Object 
+				Officer7.setName("เจ้าหน้าที่จัดกิจกรรมชมรม3"); // set ชื่อ (name) ให้ Object ชื่อ 				
+				Officer7.setUsername("30003");
+				Officer7.setPassword("1234");
+				Officer7.setOfficerStatus((long)3);
+				OfficerRepository.save(Officer7); // บันทึก Objcet ชื่อ 
+
 				Officer Officer4 = new Officer(); // สร้าง Object 
 				Officer4.setName("เจ้าหน้าที่ฝ่ายเช่าอุปกรณ์"); // set ชื่อ (name) ให้ Object ชื่อ 				
-				Officer4.setUsername("44444");
+				Officer4.setUsername("40001");
 				Officer4.setPassword("1234");
 				Officer4.setOfficerStatus((long) 4); // ใช้เช็คตอน login
 				OfficerRepository.save(Officer4); // บันทึก Objcet ชื่อ 
 
 				Officer Officer5 = new Officer(); // สร้าง Object 
 				Officer5.setName("เจ้าหน้าที่ฝ่ายสถานที่"); // set ชื่อ (name) ให้ Object ชื่อ 				
-				Officer5.setUsername("55555");
+				Officer5.setUsername("50001");
 				Officer5.setPassword("1234");
 				Officer5.setOfficerStatus((long)5);
 				OfficerRepository.save(Officer5); // บันทึก Objcet ชื่อ Clubs
+
+
 				
 // ================================= สร้าง Object Club ===============================================				
 				Clubs Clubs = new Clubs(); // สร้าง Object Clubs
