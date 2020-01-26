@@ -19,7 +19,7 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="10">
-        <v-data-table :headers="headers" :items="items" :items-per-page="5" class="elevation-1"></v-data-table>
+        <v-data-table :headers="headers" :items="tempItem" :items-per-page="5" class="elevation-1"></v-data-table>
       </v-col>
     </v-row>
 
@@ -63,8 +63,11 @@ export default {
       } else {
         this.tempItem = []
         this.items.forEach(club => {
-          if(club.clubs.clubName.includes(this.clubname)) {
-            this.tempItem.push(club)
+          if(club.clubs) {
+            if(club.clubs.clubName.includes(this.clubname)) {
+              this.tempItem.push(club)
+            }
+
           }
         });
       }
@@ -75,7 +78,7 @@ getClubmember() {
         .then(response => {
           this.items = response.data
           this.tempItem = this.items
-          console.log(JSON.stringify(this.items))
+          console.log(this.items)
         })
         .catch(e => {
           console.log(e)

@@ -155,8 +155,8 @@ export default {
         
       },
       Branchs: [],
+      Yesrs: [],
       Officers: [],
-      Years: [],
       ClubTypes: [],
       valid: false
       
@@ -224,9 +224,9 @@ export default {
           "/Clubs/" +
             this.Club.Branch_id +
             "/" +
-            this.Club.Officer_id +
-            "/" +
             this.Club.Year_id +
+            "/" +
+            this.Club.Officer_id +
             "/" +
             this.Club.ClubType_id +
             "/" +
@@ -243,8 +243,8 @@ export default {
         .then(response => {
           console.log(response.data);
           this.Club.Branch_id = ""
-          this.Club.Officer_id = ""
           this.Club.Year_id = ""
+          this.Club.Officer_id = ""
           this.Club.ClubType_id = ""
           this.Club.ClubName = ""
           this.Club.ClubPresident = ""
