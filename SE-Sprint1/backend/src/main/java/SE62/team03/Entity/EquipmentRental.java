@@ -1,8 +1,12 @@
 package SE62.team03.Entity;
+
 import lombok.*;
 import javax.persistence.*;
-import java.util.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import java.util.*;
 @Data
 @Entity
 @NoArgsConstructor
@@ -12,10 +16,12 @@ public class EquipmentRental {
     @Id
     @SequenceGenerator(name="EquipmentRental_seq",sequenceName="EquipmentRental_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EquipmentRental_seq")
-    @Column(name = "EquipmentRental_id", unique = true, nullable = true)
+    @Column(name = "EquipmentRental_id", unique = true)
     private @NotNull Long EquipmentRental_id;
     private @NotNull Date EquipmentRental_date;
+    @Size(min = 5, max = 30)
     private @NotNull String note;
+    @Pattern(regexp = "^[A-Za-zก-์\\s]+$")
     private @NotNull String renter_name;
 
     public String getRenter_name() {
@@ -38,8 +44,8 @@ public class EquipmentRental {
         return this.EquipmentRental_id;
     }
 
-    public void setEquipmentRental_id(Long EquipmentRental_id) {
-        this.EquipmentRental_id = EquipmentRental_id;
+    public void setEquipmentRental_id(Long id) {
+        this.EquipmentRental_id = id;
     }
 
 

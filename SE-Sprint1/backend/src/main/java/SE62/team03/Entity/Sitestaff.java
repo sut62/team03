@@ -1,8 +1,11 @@
 package SE62.team03.Entity;
+
 import lombok.*;
 import javax.persistence.*;
-
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
 
 @Data
 @Entity
@@ -12,8 +15,9 @@ public class Sitestaff {
 	@Id
 	@SequenceGenerator(name="SITESTAFF_SEQ",sequenceName="SITESTAFF_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SITESTAFF_SEQ")
-	@Column(name="SITESTAFF_ID",unique = true, nullable = true)
+	@Column(name="SITESTAFF_ID",unique = true)
 	private @NotNull Long id;
+	@Size(min = 5, max = 15)
 	private @NotNull String name;
 
 	public Long getId() {

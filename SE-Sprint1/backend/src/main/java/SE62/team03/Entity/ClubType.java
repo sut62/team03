@@ -14,9 +14,9 @@ public class ClubType {
 	@SequenceGenerator(name="ClubType_seq",sequenceName="ClubType_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ClubType_seq")
 	@Column(name="ClubType_ID",unique = true, nullable = true)
-	private @NotNull Long id;
+    private @NotNull Long id;
+    @Size(min = 5, max = 15)
 	private @NotNull String name;
-    @Size(max = 25)
 
    @OneToMany(fetch = FetchType.EAGER)
 	private Collection<Clubs> Clubs;

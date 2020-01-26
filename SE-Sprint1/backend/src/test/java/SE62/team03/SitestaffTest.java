@@ -34,7 +34,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void B5815029_testSaveSitestaff() {
+    void testSaveSitestaff() {
         Sitestaff sitestaff = new Sitestaff();
         sitestaff.setName("Sitestaff Name");
         sitestaff.setId(1L);
@@ -47,7 +47,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void B5815029_tesSitestaffNameMustNotBeNull() {
+    void tesSitestaffNameMustNotBeNull() {
         Sitestaff sitestaff = new Sitestaff();
         sitestaff.setName(null);
         sitestaff.setId(1L);
@@ -61,7 +61,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void B5815029_testSitestaffIdMustNotBeNull() {
+    void testSitestaffIdMustNotBeNull() {
         Sitestaff sitestaff = new Sitestaff();
         sitestaff.setName("Sitestaff Name");
         sitestaff.setId(null);
@@ -76,7 +76,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void B5815029_tesSitestaffNameMustNotLessThan5() {
+    void tesSitestaffNameMustNotLessThan5() {
         Sitestaff Sitestaff = new Sitestaff();
         Sitestaff.setName("staf");
         Sitestaff.setId(1L);
@@ -90,7 +90,7 @@ public class SitestaffTest {
     }
 
     @Test
-    void B5815029_tesSitestaffNameMustNotMoreThan15() {
+    void tesSitestaffNameMustNotMoreThan15() {
         Sitestaff Sitestaff = new Sitestaff();
         Sitestaff.setName("site staff should not more than 15");
         Sitestaff.setId(1L);
@@ -100,20 +100,6 @@ public class SitestaffTest {
 
         ConstraintViolation<Sitestaff> v = result.iterator().next();
         assertEquals("size must be between 5 and 15", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5815029_tesSitestaffNameCanEnterAlphaNumberSpace() {
-        Sitestaff Sitestaff = new Sitestaff();
-        Sitestaff.setName("shouldn't $");
-        Sitestaff.setId(1L);
-        Set<ConstraintViolation<Sitestaff>> result = validator.validate(Sitestaff);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Sitestaff> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-z0-9\\s]+$\"", v.getMessage());
         assertEquals("name", v.getPropertyPath().toString());
     }
 }

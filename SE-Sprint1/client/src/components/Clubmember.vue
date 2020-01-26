@@ -6,12 +6,11 @@
         <h1 class="display-2 font-weight-bold mb-3">Welcome to Clubmember Apply</h1>
       </v-flex>
     </v-layout>
-   
-     <v-row justify="center">  
-      <v-col cols="4">
-       <v-form v-model="valid" ref="form"> 
 
-           <v-row>
+    <v-row justify="center">
+      <v-col cols="4">
+        <v-form v-model="valid" ref="form">
+          <v-row>
             <v-col cols="10">
               <v-select
                 label="ชื่อชมรม"
@@ -26,19 +25,19 @@
             </v-col>
           </v-row>
 
-             <v-row>
-              <v-col cols="10">
-                <v-text-field
-                      outlined
-                      label="ชื่อ"
-                      v-model="Clubmember.name"
-                      :rules="[(v) => !!v || 'ใส่ชื่อ']"
-                      required
+          <v-row>
+            <v-col cols="10">
+              <v-text-field
+                outlined
+                label="ชื่อ"
+                v-model="Clubmember.name"
+                :rules="[(v) => !!v || 'ใส่ชื่อ']"
+                required
               ></v-text-field>
-              </v-col>
-              </v-row>
+            </v-col>
+          </v-row>
 
-                     <v-row>
+          <v-row>
             <v-col cols="10">
               <v-select
                 label="สาขาวิชา"
@@ -53,7 +52,7 @@
             </v-col>
           </v-row>
 
-               <v-row>
+          <v-row>
             <v-col cols="4">
               <v-select
                 label="ชั้นปี"
@@ -67,39 +66,36 @@
               ></v-select>
             </v-col>
           </v-row>
-           
-            <v-row justify="center">
+
+          <v-row justify="center">
             <v-col cols="12">
               <v-btn @click="saveClubmember" :class="{ red: !valid, green: valid }">ยืนยัน</v-btn>
               <v-btn style="margin-left: 15px;" @click="clear">ยกเลิก</v-btn>
-              </v-col>
-          </v-row> 
+            </v-col>
+          </v-row>
 
-       <br /> 
-       <br />
+          <br />
+          <br />
 
-           <v-row justify="center">
-        <v-btn style="margin-left: 15px;" color="#29B6F6"  v-on:click="Clubmemberview">ดูข้อมูล</v-btn>
-      </v-row>
+          <v-row justify="center">
+            <v-btn style="margin-left: 15px;" color="#29B6F6" v-on:click="Clubmemberview">ดูข้อมูล</v-btn>
+          </v-row>
 
-      <br />
-      
-           <v-row justify="center">
-          <v-btn style="margin-left: 15px;" color="yellow accent-4"  v-on:click="Login">Logout</v-btn>
-         </v-row> 
+          <br />
+
+          <v-row justify="center">
+            <v-btn style="margin-left: 15px;" color="yellow accent-4" v-on:click="Login">Logout</v-btn>
+          </v-row>
 
           <br />
         </v-form>
       </v-col>
-     </v-row>
-
- 
-   
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import http from "../http-common";
+import http from "../http-common"
 
 export default {
   name: "Clubmember",
@@ -110,29 +106,27 @@ export default {
         Year_id: "",
         Club_id: "",
         name: ""
-        
       },
       Branch: [],
       Clubs: [],
       Year: [],
       valid: false
-      
-    };
+    }
   },
   methods: {
     /* eslint-disable no-console */
-  
+
     // ดึงข้อมูล Branch ใส่ combobox
     getBranchs() {
       http
         .get("/Branch")
         .then(response => {
-          this.Branch = response.data;
-          console.log(response.data);
+          this.Branch = response.data
+          console.log(response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
 
     // ดึงข้อมูล Club ใส่ combobox
@@ -140,12 +134,12 @@ export default {
       http
         .get("/Clubs")
         .then(response => {
-          this.Clubs = response.data;
-          console.log(response.data);
+          this.Clubs = response.data
+          console.log(response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
 
     // ดึงข้อมูล Year ใส่ combobox
@@ -153,65 +147,63 @@ export default {
       http
         .get("/Year")
         .then(response => {
-          this.Year = response.data;
-          console.log(response.data);
+          this.Year = response.data
+          console.log(response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
-   
-    
+
     // function เมื่อกดปุ่ม ยืนยัน
     saveClubmember() {
-      http
-        .post(
-          "/Clubmember/" +
-            this.Clubmember.Branch_id +
-            "/" +
-            this.Clubmember.Club_id +
-            "/" +
-            this.Clubmember.Year_id +
-            "/" +
-            this.Clubmember.name,
+        http
+          .post(
+            "/Clubmember/" +
+              this.Clubmember.Branch_id +
+              "/" +
+              this.Clubmember.Year_id +
+              "/" +
+              this.Clubmember.Club_id +
+              "/" +
+              this.Clubmember.name,
             this.Clubmember
-            
-           )
-        .then(response => {
-          console.log(response.data);
-          this.Clubmember.Branch_id = ""
-          this.Clubmember.Club_id = ""
-          this.Clubmember.Year_id = ""
-          this.Clubmember.name = ""
-         this.$router.push("/Clubmemberview");
-          
-          alert('บันทึกสำเร็จ');
-        })
-        .catch(e => {
-          console.log(e);
-        });
-      this.submitted = true;
+          )
+          .then(response => {
+            console.log(response.data)
+            this.Clubmember.Branch_id = ""
+            this.Clubmember.Club_id = ""
+            this.Clubmember.Year_id = ""
+            this.Clubmember.name = ""
+            this.$router.push("/Clubmemberview")
+
+            alert("บันทึกสำเร็จ")
+          })
+          .catch(e => {
+            console.log(e)
+          })
+        this.submitted = true
     },
     clear() {
-    this.$refs.form.reset();
+      this.$refs.form.reset()
     },
-      Clubmemberview() {
+    Clubmemberview() {
       this.$router.push("/Clubmemberview")
     },
-      Login() {
+    Login() {
       this.$router.push("/Login")
     },
     refreshList() {
-      this.getBranchs();
-      this.getClubs();
-      this.getYears();
+      this.getBranchs()
+      this.getClubs()
+      this.getYears()
     }
     /* eslint-enable no-console */
   },
   mounted() {
-    this.getBranchs();
-    this.getClubs();
-    this.getYears();
+    this.getBranchs()
+    this.getClubs()
+    this.getYears()
   }
-};
+}
 </script>

@@ -34,7 +34,7 @@ public class RoomTest {
     }
 
     @Test
-    void B5815029_testSaveRoom() {
+    void testSaveRoom() {
         Room room = new Room();
         room.setName("RoomName");
         room.setId(1L);
@@ -47,7 +47,7 @@ public class RoomTest {
     }
 
     @Test
-    void B5815029_tesRoomNameMustNotBeNull() {
+    void tesRoomNameMustNotBeNull() {
         Room room = new Room();
         room.setName(null);
         room.setId(1L);
@@ -61,7 +61,7 @@ public class RoomTest {
     }
 
     @Test
-    void B5815029_testRoomIdMustNotBeNull() {
+    void testRoomIdMustNotBeNull() {
         Room room = new Room();
         room.setName("RoomName");
         room.setId(null);
@@ -76,7 +76,7 @@ public class RoomTest {
     }
 
     @Test
-    void B5815029_tesRoomNameMustEnterOnlyNumberAndAlpha() {
+    void tesRoomNameMustEnterOnlyNumberAndAlpha() {
         Room room = new Room();
         room.setName("Room1@");
         room.setId(1L);
@@ -85,35 +85,7 @@ public class RoomTest {
         assertEquals(1, result.size());
 
         ConstraintViolation<Room> v = result.iterator().next();
-        assertEquals("must match \"^[A-Za-z0-9\\s]+$\"", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
-    }
-    
-    @Test
-    void B5815029_tesRoomNameMustNotLessThan4() {
-        Room room = new Room();
-        room.setName("Roo");
-        room.setId(1L);
-        Set<ConstraintViolation<Room>> result = validator.validate(room);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Room> v = result.iterator().next();
-        assertEquals("size must be between 4 and 10", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
-    }
-
-    @Test
-    void B5815029_tesRoomNameMustNotMoreThan10() {
-        Room room = new Room();
-        room.setName("Room name number 1");
-        room.setId(1L);
-        Set<ConstraintViolation<Room>> result = validator.validate(room);
-
-        assertEquals(1, result.size());
-
-        ConstraintViolation<Room> v = result.iterator().next();
-        assertEquals("size must be between 4 and 10", v.getMessage());
+        assertEquals("must match \"^[A-Za-z0-9]+$\"", v.getMessage());
         assertEquals("name", v.getPropertyPath().toString());
     }
 }

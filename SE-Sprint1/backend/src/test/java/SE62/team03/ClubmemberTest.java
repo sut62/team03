@@ -57,7 +57,7 @@ public class ClubmemberTest {
 
         ConstraintViolation<Clubmember> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
+        assertEquals("ClubmemberName", v.getPropertyPath().toString());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ClubmemberTest {
 
         ConstraintViolation<Clubmember> v = result.iterator().next();
         assertEquals("must match \"^[0-9A-Za-zก-์\\s]+$\"", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
+        assertEquals("ClubmemberName", v.getPropertyPath().toString());
     }
 
     @Test
@@ -100,7 +100,7 @@ public class ClubmemberTest {
 
         ConstraintViolation<Clubmember> v = result.iterator().next();
         assertEquals("size must be between 3 and 30", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
+        assertEquals("ClubmemberName", v.getPropertyPath().toString());
     }
 
     @Test
@@ -114,6 +114,6 @@ public class ClubmemberTest {
 
         ConstraintViolation<Clubmember> v = result.iterator().next();
         assertEquals("size must be between 3 and 30", v.getMessage());
-        assertEquals("name", v.getPropertyPath().toString());
+        assertEquals("ClubmemberName", v.getPropertyPath().toString());
     }
 }

@@ -2,8 +2,11 @@ package SE62.team03.Entity;
 import lombok.*;
 import javax.persistence.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -17,6 +20,7 @@ public class Clubmember {
     @Column(name = "Clubmember_ID", unique = true, nullable = true)
     private @NotNull Long id;
     @Pattern(regexp = "^[0-9A-Za-zก-์\\s]+$")
+    @Size(min = 3, max = 30)
     private @NotNull String ClubmemberName;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Branch.class)
