@@ -52,7 +52,7 @@ export default {
   methods: {
     /* eslint-disable no-console */
     Clubmember() {
-        this.$router.push("/")
+        this.$router.push("/Clubmember")
     },
      reset() {
       this.tempItem = this.items

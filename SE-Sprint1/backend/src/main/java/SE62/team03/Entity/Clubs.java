@@ -17,8 +17,9 @@ public class Clubs {
   
 
   private @NotNull Long id;
+  @Size(min = 5, max = 25)
   private @NotNull String ClubName;
-  @Size(max = 25)
+  @Pattern(regexp = "^[A-Za-zก-์\\s]+$")
   private @NotNull String ClubPresident;
   private @NotNull String Objective;
   private @NotNull String advisors;
