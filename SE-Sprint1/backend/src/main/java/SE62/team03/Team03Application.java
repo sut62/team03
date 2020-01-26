@@ -72,15 +72,15 @@ public class Team03Application {
 				Officer5.setUsername("55555");
 				Officer5.setPassword("1234");
 				Officer5.setOfficerStatus((long)5);
-				OfficerRepository.save(Officer5); // บันทึก Objcet ชื่อ Doctor
+				OfficerRepository.save(Officer5); // บันทึก Objcet ชื่อ Clubs
 				
 // ================================= สร้าง Object Club ===============================================				
-				Clubs Clubs = new Clubs(); // สร้าง Object Doctor
-				Clubs.setName("ชมรมคอมพิวเตอร์"); // set ชื่อ (name) ให้ Object ชื่อ Doctor				
-				Clubs.setAdvisor("มะลิ"); // set ชื่อ (name) ให้ Object ชื่อ Doctor
+				Clubs Clubs = new Clubs(); // สร้าง Object Clubs
+				Clubs.setName("ชมรมคอมพิวเตอร์"); // set ชื่อ (name) ให้ Object ชื่อ Clubs			
+				Clubs.setAdvisor("มะลิ"); // set ชื่อ (name) ให้ Object ชื่อ Clubs
 				Clubs.setClubPresident("มะละ");
 				Clubs.setObjective("55555555");
-				ClubsRepository.save(Clubs); // บันทึก Objcet ชื่อ Doctor
+				ClubsRepository.save(Clubs); // บันทึก Objcet ชื่อ Clubs
 // ================================= สร้าง Object Clubmember ===============================================				
                Clubmember Clubmember = new Clubmember(); // สร้าง Object Clubmember
 			   Clubmember.setName("พระจันทร์"); // set ชื่อ (name) ให้ Object ชื่อ Clubmember
@@ -125,7 +125,7 @@ public class Team03Application {
 					equipmentRepository.save(equipment);
 				});
 
-			//LocationRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity doctor บน Terminal
+			//LocationRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity Clubs บน Terminal
 		
             
            
