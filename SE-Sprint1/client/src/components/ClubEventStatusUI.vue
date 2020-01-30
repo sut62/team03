@@ -7,6 +7,23 @@
     <v-row justify="center">
       <v-col cols="6">
         <v-form v-model="valid" ref="form">
+
+          <!-- popupStatus -->
+
+          <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+              >
+                <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+              >
+                <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+              </div>
+   <!-- popupStatus -->
+
           <v-row>
             <v-col cols="10">
               <v-select
@@ -79,7 +96,12 @@ export default {
       clubEventDate: "",
       location: "",
       clubHost: "",
-      isSelected: false
+      isSelected: false,
+       saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
     }
   },
   // ดึงข้อมูลจาก ClubEvent ที่เลือกมาเเสดง
@@ -112,6 +134,7 @@ export default {
           console.log(e)
         })
     },
+
     cancel() {
       if (this.clubEventID === "") {
         alert("กรุณาเลือกกิจกรรม")
@@ -120,14 +143,29 @@ export default {
           .delete("/disapprove/" + this.ClubEventID, this.ClubEventID)
           .then(response => {
             if (response.data) {
-              alert("ไม่สามารถยกเลิกกิจกรรม")
+              this.saveStatus.message = "ไม่สามารถยกเลิกกิจกรรมได้"
+              this.saveStatus.isSuccess = true
+              setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+              }, 3000)
             } else {
-              alert("ยกเลิกกิจกรรมสำเร็จ")
+              this.saveStatus.message = "ยกเลิกกิจกรรมสำเร็จ"
+              this.saveStatus.isSuccess = true
+              setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+              }, 3000)
               this.getClubEvent()
             }
           })
           .catch(() => {
-            alert("ไม่สามารถยกเลิกกิจกรรม")
+              this.saveStatus.message = "กรุณาเลือกกิจกรรม"
+              this.saveStatus.isSuccess = true
+              setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+              }, 3000)
           })
         this.ClubEventID = ""
         this.clubName = ""
@@ -143,7 +181,12 @@ export default {
     // เมื่อกดปุ่ม อนุมัติ ให้ update กิจกรรมที่เลือก ตรง ClubEventStatus จาก รออนุมัติเป็นอนุมัติ
     approve() {
       if (this.clubEventID === "") {
-        alert("กรุณาเลือกกิจกรรม")
+              this.saveStatus.message = "กรุณาเลือกกิจกรรม"
+              this.saveStatus.isSuccess = true
+              setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+              }, 3000)
       } else {
         http
           .post("/approveevent/" + this.ClubEventID, this.ClubEvent)
@@ -158,13 +201,23 @@ export default {
             this.clubHost = ""
             this.isSelected = ""
             if (response.data) {
-              alert("อนุมัติสำเร็จ")
+               this.saveStatus.message = "อนุมัติกิจกรรมสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 3000)
             }
             // this.$router.push("/view");
           })
-          .catch(e => {
-            console.log(e)
-          })
+          .catch(() => {
+          this.saveStatus.message = "กรุณาเลือกกิจกรรม"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 8080)
+        })
         this.submitted = true
       }
     },
