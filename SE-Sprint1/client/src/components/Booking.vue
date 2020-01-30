@@ -10,6 +10,41 @@
     <v-row justify="center">
       <v-col cols="4">
         <v-form v-model="valid" ref="form">
+<!-- saveStatus -->
+
+               
+
+              <div
+
+                v-if="saveStatus.isSuccess"
+
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+
+              >
+
+                <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+
+              </div>
+
+              <div
+
+                v-if="saveStatus.isFail"
+
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+
+              >
+
+                <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+
+              </div>
+
+
+
+  
+
+<!-- //  -->
+
+
           <v-row>
             <v-col cols="10">
               <v-select
@@ -101,13 +136,36 @@
             <v-col cols="12">
               <v-btn @click="savebooking" :class="{ red: !valid, green: valid }">submit</v-btn>
               <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
-              <v-btn style="float: right" color="primary" @click="viewData">ดูข้อมูล</v-btn>
+              <v-btn style="margin-left: 250px" color="primary" @click="viewData">ดูข้อมูล</v-btn>
             </v-col>
           </v-row>
+
+
+
           <br />
         </v-form>
       </v-col>
     </v-row>
+    
+  <v-row justify="center">
+            <v-col cols="1">
+                <v-bottom-navigation :value="activeBtn" color="deep-purple accent-4">
+
+            <v-btn >
+
+              <span><router-link to="/Login"> logOut </router-link></span>
+
+            </v-btn>
+
+        
+
+      </v-bottom-navigation>
+            </v-col>
+          </v-row>
+
+
+
+   
   </v-container>
 </template>
 
@@ -132,7 +190,15 @@ export default {
       Clubmember: [],
       Clubs: [],
       Room: [],
-      valid: false
+      //valid: false
+      saveStatus: {
+
+        isSuccess: false,
+
+        isFail: false,
+
+        message: ""
+      }
     };
   },
   methods: {
@@ -206,15 +272,57 @@ export default {
           this.booking
         )
         .then(response => {
-          alert('ทำรายการสำเร็จ');
-          console.log(response);
-          //this.$router.push("/view");
+
+         if (response) {
+
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+
+            this.saveStatus.isSuccess = true
+
+            setTimeout(() => {
+
+              this.saveStatus.message = ""
+
+              this.saveStatus.isSuccess = false
+
+            }, 3000)
+
+          } else {
+
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+
+            this.saveStatus.isFail = true
+
+            setTimeout(() => {
+
+              this.saveStatus.message = ""
+
+              this.saveStatus.isFail = false
+
+            }, 8080)
+
+          }
+
         })
-        .catch(e => {
-          alert('ไม่สามารถทำรายการได้');
-          console.log(e);
-        });
-      this.submitted = true;
+
+        .catch(() => {
+
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+
+          this.saveStatus.isFail = true
+
+           setTimeout(() => {
+
+              this.saveStatus.message = ""
+
+              this.saveStatus.isFail = false
+
+            }, 8080)
+
+        })
+
+         this.$refs.form.reset();
+
     },
     clear() {
       this.$refs.form.reset();
