@@ -117,7 +117,26 @@
               ></v-select>
             </v-col>
           </v-row>
-
+          
+            <v-row justify="center">
+        <v-col cols="7">
+          <v-row justify="center">
+            <v-col cols="6">
+              <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #607D8B; align-items: center">
+                <div style="padding: 15px; color: ">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #607D8B; align-items: center">
+                <div style="padding: 15px; color: #FF3D00">{{saveStatus.message}}</div>
+              </div>
+              
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
          
 
           <v-row justify="center">
@@ -127,9 +146,21 @@
               </v-col>
           </v-row>
           <br />
+
+         <v-row justify="left">
+            <v-btn style="margin-left: 15px;" color="#00838F" v-on:click="ClubHome">ฺBack</v-btn>
+              <v-row justify="center">
+            <v-btn style="margin-left: 15px;" color="yellow accent-4" v-on:click="Login">Logout</v-btn>
+          </v-row>
+          </v-row>
+
+          
         </v-form>
       </v-col>
      </v-row>
+          
+        
+        
 
  
    
@@ -158,7 +189,12 @@ export default {
       Yesrs: [],
       Officers: [],
       ClubTypes: [],
-      valid: false
+      valid: false,
+       saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
       
     };
   },
@@ -240,26 +276,42 @@ export default {
             this.Club
             
            )
-        .then(response => {
-          console.log(response.data);
-          this.Club.Branch_id = ""
-          this.Club.Year_id = ""
-          this.Club.Officer_id = ""
-          this.Club.ClubType_id = ""
-          this.Club.ClubName = ""
-          this.Club.ClubPresident = ""
-          this.Club.Objective = ""
-          this.Club.advisors = ""
-          
-          alert('บันทึกสำเร็จ');
+              .then(response => {
+          if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 5000)
+          } else {
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 5000)
+          }
         })
-        .catch(e => {
-          console.log(e);
-        });
-      this.submitted = true;
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 5000)
+        })
     },
     clear() {
-      this.$refs.form.reset();
+      this.$refs.form.reset()
+    },
+
+     Login() {
+      this.$router.push("/Login")
+    },
+
+     ClubHome() {
+      this.$router.push("/ClubHome")
     },
 
     refreshList() {

@@ -67,6 +67,28 @@
             </v-col>
           </v-row>
 
+             <v-row justify="center">
+        <v-col cols="7">
+          <v-row justify="center">
+            <v-col cols="6">
+              <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #607D8B; align-items: center"
+              >
+                <div style="padding: 15px; color: ">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #607D8B; align-items: center"
+              >
+                <div style="padding: 15px; color: #FF3D00">{{saveStatus.message}}</div>
+              </div>
+              
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+
           <v-row justify="center">
             <v-col cols="12">
               <v-btn @click="saveClubmember" :class="{ red: !valid, green: valid }">ยืนยัน</v-btn>
@@ -75,19 +97,20 @@
           </v-row>
 
           <br />
-          <br />
 
           <v-row justify="center">
             <v-btn style="margin-left: 15px;" color="#29B6F6" v-on:click="Clubmemberview">ดูข้อมูล</v-btn>
           </v-row>
 
           <br />
-
-          <v-row justify="center">
+          <v-row justify="left">
+            <v-btn style="margin-left: 15px;" color="#00838F" v-on:click="ClubHome">ฺBack</v-btn>
+              <v-row justify="center">
             <v-btn style="margin-left: 15px;" color="yellow accent-4" v-on:click="Login">Logout</v-btn>
           </v-row>
+          </v-row>
 
-          <br />
+       
         </v-form>
       </v-col>
     </v-row>
@@ -110,7 +133,12 @@ export default {
       Branch: [],
       Clubs: [],
       Year: [],
-      valid: false
+      valid: false,
+       saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
     }
   },
   methods: {
@@ -170,29 +198,46 @@ export default {
             this.Clubmember
           )
           .then(response => {
-            console.log(response.data)
-            this.Clubmember.Branch_id = ""
-            this.Clubmember.Club_id = ""
-            this.Clubmember.Year_id = ""
-            this.Clubmember.name = ""
-            this.$router.push("/Clubmemberview")
-
-            alert("บันทึกสำเร็จ")
-          })
-          .catch(e => {
-            console.log(e)
-          })
-        this.submitted = true
+             if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 5000)
+          } else {
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 5000)
+          }
+        })
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 5000)
+        })
     },
     clear() {
       this.$refs.form.reset()
     },
+
     Clubmemberview() {
       this.$router.push("/Clubmemberview")
     },
     Login() {
       this.$router.push("/Login")
     },
+
+       ClubHome() {
+      this.$router.push("/ClubHome")
+    },
+
     refreshList() {
       this.getBranchs()
       this.getClubs()
