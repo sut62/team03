@@ -6,6 +6,23 @@
         <h1 class="display-2 font-weight-bold mb-3">ระบบจัดการงบชมรม</h1>
       </v-flex>
     </v-layout>
+    <!-- saveStatus -->
+               
+              <div
+                v-if="saveStatus.isSuccess"
+                style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+              >
+                <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+              </div>
+              <div
+                v-if="saveStatus.isFail"
+                style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+              >
+                <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+              </div>
+
+  
+<!-- //  -->
 
     <v-row justify="center">
       <v-col cols="4">
@@ -99,7 +116,16 @@ export default {
       Clubs: [],
       valid: false,
       foo: 0,
-      amount: ""
+      
+      
+      saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
+    
+
+      
     };
   },
   methods: {
@@ -118,22 +144,32 @@ export default {
             this.Budget.memberId,
           this.budget
         )
-        .then(response => {
-          console.log(response.data);
-          this.amount = "";
-          this.Budget.clubId = "";
-          this.Budget.clubtypeId = "";
-          this.Budget.memberId = "";
-          if (response) {
-            alert("ทำรายการสำเร็จ");
+       .then(response => {
+         if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 3000)
+          } else {
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 8080)
           }
-          // this.$router.push("/view");
         })
-        .catch(e => {
-          alert('ไม่สามารถทำรายการได้');
-          console.log(e);
-        });
-      this.submitted = true;
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+           setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 8080)
+        })
+         this.$refs.form.reset();
     },
 
 
