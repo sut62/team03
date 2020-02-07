@@ -9,6 +9,22 @@
 
     <v-row justify="center">
       <v-col cols="4">
+        <v-row>
+          <v-col cols="12">
+            <div
+              v-if="saveStatus.isSuccess"
+              style="border: 1px solid #79FFBA; border-radius: 5px; background-color: #B2FFD7; align-items: center"
+            >
+              <div style="padding: 15px; color: #029E4E">{{saveStatus.message}}</div>
+            </div>
+            <div
+              v-if="saveStatus.isFail"
+              style="border: 1px solid #FFA879; border-radius: 5px; background-color: #FFD6B2; align-items: center"
+            >
+              <div style="padding: 15px; color: #733600">{{saveStatus.message}}</div>
+            </div>
+          </v-col>
+        </v-row>
         <v-form v-model="valid" ref="form">
           <v-row>
             <v-col cols="12">
@@ -17,8 +33,8 @@
                 outlined
                 v-model="equipmentRental.club_id"
                 :items="Clubs"
-                  item-text="clubName"
-                  item-value="id"
+                item-text="clubName"
+                item-value="id"
                 :rules="[(v) => !!v || 'Item is required']"
                 required
               ></v-select>
@@ -55,7 +71,9 @@
                 label="Officer name"
                 outlined
                 v-model="equipmentRental.officer_id"
-               :items="Officer" item-text="name" item-value="id"
+                :items="Officer"
+                item-text="name"
+                item-value="id"
                 :rules="[(v) => !!v || 'Item is required']"
                 required
               ></v-select>
@@ -99,7 +117,12 @@ export default {
       Officer: [],
       equipments: [],
       valid: false,
-      foo: 0
+      foo: 0,
+      saveStatus: {
+        isSuccess: false,
+        isFail: false,
+        message: ""
+      }
     }
   },
   methods: {
@@ -108,23 +131,23 @@ export default {
       http
         .get("/Clubs")
         .then(response => {
-          this.Clubs = response.data;
-          console.log(response.data);
+          this.Clubs = response.data
+          console.log(response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
     getOfficer() {
       http
         .get("/Officer")
         .then(response => {
-          this.Officer = response.data;
-          console.log(response.data);
+          this.Officer = response.data
+          console.log(response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
     getEquipments() {
       http
@@ -138,6 +161,8 @@ export default {
         })
     },
     // @PostMapping("/equipmentrental/{club_id}/{officer_id}/{equipment_id}/{note}/{renter_name}")
+
+    //ไม่มี
 
     saveEquipmentRental() {
       if (this.equipmentRental.note === "") {
@@ -157,16 +182,35 @@ export default {
             this.equipmentRental.renter_name,
           this.equipmentRental
         )
-        .then(() => {
-          alert("บันทึกข้อมูลสำเร็จ")
-          this.equipmentRental.club_id = ""
-          this.equipmentRental.officer_id = ""
-          this.equipmentRental.equipment_id = ""
-          this.equipmentRental.note = ""
-          this.equipmentRental.renter_name = ""
+        .then(response => {
+          if (response) {
+            this.saveStatus.message = "บันทึกข้อมูลสำเร็จ"
+            this.saveStatus.isSuccess = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isSuccess = false
+            }, 6000)
+            this.equipmentRental.club_id = ""
+            this.equipmentRental.officer_id = ""
+            this.equipmentRental.equipment_id = ""
+            this.equipmentRental.note = ""
+            this.equipmentRental.renter_name = ""
+          } else {
+            this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+            this.saveStatus.isFail = true
+            setTimeout(() => {
+              this.saveStatus.message = ""
+              this.saveStatus.isFail = false
+            }, 6000)
+          }
         })
-        .catch(e => {
-          console.log(e)
+        .catch(() => {
+          this.saveStatus.message = "บันทึกข้อมูลไม่สำเร็จ"
+          this.saveStatus.isFail = true
+          setTimeout(() => {
+            this.saveStatus.message = ""
+            this.saveStatus.isFail = false
+          }, 6000)
         })
       this.submitted = true
     },
@@ -185,8 +229,8 @@ export default {
   },
   mounted() {
     this.getClubs()
-      this.getOfficer()
-      this.getEquipments()
+    this.getOfficer()
+    this.getEquipments()
   }
 }
 </script>
