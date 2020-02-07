@@ -93,6 +93,21 @@
         </v-form>
       </v-col>
     </v-row>
+    <v-row justify="center">
+            <v-col cols="1">
+                <v-bottom-navigation :value="activeBtn" color="deep-purple accent-4">
+
+            <v-btn >
+
+              <span><router-link to="/Login"> logOut </router-link></span>
+
+            </v-btn>
+
+        
+
+      </v-bottom-navigation>
+            </v-col>
+          </v-row>
   </v-container>
 </template>
 

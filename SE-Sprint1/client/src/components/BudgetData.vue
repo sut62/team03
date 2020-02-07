@@ -20,8 +20,26 @@
     <v-row justify="center">
       <v-col cols="8">
         <v-data-table :headers="headers" :items="tempItem" :items-per-page="5" class="elevation-1"></v-data-table>
+        
+          
       </v-col>
     </v-row>
+    <v-row justify="center">
+            <v-col cols="1">
+                <v-bottom-navigation :value="activeBtn" color="deep-purple accent-4">
+
+            <v-btn >
+
+              <span><router-link to="/Budget"> ย้อนกลับ </router-link></span>
+
+            </v-btn>
+
+        
+
+      </v-bottom-navigation>
+            </v-col>
+          </v-row>
+          
   </v-container>
 </template>
 
