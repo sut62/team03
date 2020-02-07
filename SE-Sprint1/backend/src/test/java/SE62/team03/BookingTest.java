@@ -36,16 +36,19 @@ public class BookingTest {
     }
 
     @Test
-    void B5815029_tesClubFull() {
+    void B5815029_tesBooking() {
         Booking booking = new Booking();
+        Date date = new Date();
         booking.setId(1L);
-        booking.setBookingDate("2020-01-20");
+        booking.setBookingDate(date);
+        
+
         booking = bookingRepository.saveAndFlush(booking);
 
         Optional<Booking> found = bookingRepository.findById(booking.getId());
 
         assertEquals(1L, found.get().getId());
-        assertEquals("2020-01-20", found.get().getBookingDate());
+        assertEquals(date, found.get().getBookingDate());
     }
 
     @Test
@@ -65,7 +68,8 @@ public class BookingTest {
     @Test
     void B5815029_testBookingIdMustNotBeNull() {
         Booking booking = new Booking();
-        booking.setBookingDate("2020-01-20");
+        Date date = new Date();
+        booking.setBookingDate(date);
         booking.setId(null);
 
         Set<ConstraintViolation<Booking>> result = validator.validate(booking);
