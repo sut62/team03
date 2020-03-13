@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParseException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +56,7 @@ public class ClubEvenController {
     @PathVariable long ClubID,
     @PathVariable String ClubEventName,
     @PathVariable long LocationID,
-    @PathVariable String ClubEventDate,
+    @PathVariable("ClubEventDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date ClubEventDate,
     @PathVariable long ClubEventPepleAmount,
     @PathVariable String ClubHost,
     @PathVariable long OfficerID){

@@ -1,6 +1,9 @@
 package SE62.team03.Entity;
 
 import lombok.*;
+
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -24,7 +27,7 @@ public class ClubEvent {
   @Size(min = 5, max = 50)
   @Pattern(regexp = "^[0-9A-Za-zก-์\\s]+$")
   private @NotNull String ClubEventName;
-  private @NotNull String ClubEventDate;
+  private @NotNull Date ClubEventDate;
   private @NotNull String ClubHost;
   private @NotNull String ClubEventStatus;
 

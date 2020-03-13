@@ -13,6 +13,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,7 +40,8 @@ public class ClubEventTest {
         ClubEvent clubEvent = new ClubEvent();
         clubEvent.setClubEventID(1L);
         clubEvent.setClubEventName("กิจกรรม");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventStatus("รอการอนุมัติ");
@@ -48,7 +51,7 @@ public class ClubEventTest {
 
         assertEquals(1L, ClubEvent.get().getClubEventID());
         assertEquals("กิจกรรม", ClubEvent.get().getClubEventName());
-        assertEquals("10-01-2020", ClubEvent.get().getClubEventDate());
+        assertEquals(date, ClubEvent.get().getClubEventDate());
         assertEquals(60L, ClubEvent.get().getClubEventPepleAmount());
         assertEquals("Host", ClubEvent.get().getClubHost());
         assertEquals("รอการอนุมัติ", ClubEvent.get().getClubEventStatus());
@@ -61,7 +64,8 @@ public class ClubEventTest {
         clubEvent.setClubEventName("โครงการ");
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
@@ -77,7 +81,8 @@ public class ClubEventTest {
         clubEvent.setClubEventName(null);
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
@@ -93,7 +98,8 @@ public class ClubEventTest {
         clubEvent.setClubEventName("โครงการ");
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost(null);
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         clubEvent.setClubEventStatus("รอการอนุมัติ");
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
@@ -126,7 +132,8 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(null);
         clubEvent.setClubEventStatus("รอการอนุมัติ");
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -142,7 +149,8 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(0L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventStatus("รอการอนุมัติ");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
         assertEquals(1, result.size());
@@ -160,7 +168,8 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(10001L);
         clubEvent.setClubEventStatus("รอการอนุมัติ");
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
 
         assertEquals(1, result.size());
@@ -178,7 +187,8 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventStatus("รอการอนุมัติ");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -195,7 +205,8 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventStatus("รอการอนุมัติ");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -211,7 +222,8 @@ public class ClubEventTest {
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
         clubEvent.setClubEventStatus("รอการอนุมัติ");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
         ConstraintViolation<ClubEvent> v = result.iterator().next();
@@ -226,7 +238,8 @@ public class ClubEventTest {
         clubEvent.setClubEventName("โครงการ");
         clubEvent.setClubEventPepleAmount(60L);
         clubEvent.setClubHost("Host");
-        clubEvent.setClubEventDate("10-01-2020");
+        Date date = new Date();
+        clubEvent.setClubEventDate(date);
         clubEvent.setClubEventStatus(null);
         Set<ConstraintViolation<ClubEvent>> result = validator.validate(clubEvent);
         assertEquals(1, result.size());
