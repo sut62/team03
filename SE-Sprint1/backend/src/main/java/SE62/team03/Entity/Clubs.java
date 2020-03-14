@@ -60,4 +60,38 @@ public class Clubs {
     this.Objective = Objective;
   }
 
+  public void setBranch(Branch branch) {
+    this.Branch = branch;
+}
+
+public Branch getBranch() {
+    return Branch;
+}
+
+public ClubType getClubType() {
+    return ClubType;
+}
+
+public void setClubType(ClubType clubtype) {
+    this.ClubType = clubtype;
+}
+
+public Year getYear() {
+    return Year;
+}
+
+public void setYear(Year year) {
+    this.Year = year;
+}
+
+public void setOfficer(Officer officer) {
+  this.officer = officer;
+}
+
+public Officer getOfficer() {
+  return officer;
+}
+
+
+
 }
