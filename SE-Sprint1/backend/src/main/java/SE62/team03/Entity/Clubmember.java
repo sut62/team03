@@ -23,17 +23,49 @@ public class Clubmember {
     @Size(min = 3, max = 30)
     private @NotNull String ClubmemberName;
 
+    public String getClubmemberName() {
+        return this.ClubmemberName;
+    }
+
+    public void setClubmemberName(String ClubmemberName) {
+        this.ClubmemberName = ClubmemberName;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Branch.class)
     @JoinColumn(name = "Branch_ID", insertable = true)
-    private Branch Branch;
+    private @NotNull Branch Branch;
+
+    public Branch getBranch() {
+        return this.Branch;
+    }
+
+    public void setBranch(Branch Branch) {
+        this.Branch = Branch;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Year.class)
     @JoinColumn(name = "Year_ID", insertable = true)
-    private Year Year;
+    private @NotNull Year Year;
+
+    public Year getYear() {
+        return this.Year;
+    }
+
+    public void setYear(Year Year) {
+        this.Year = Year;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)
     @JoinColumn(name = "Club_ID", insertable = true)
-    private Clubs Clubs;
+    private @NotNull Clubs Clubs;
+
+    public Clubs getClubs() {
+        return this.Clubs;
+    }
+
+    public void setClubs(Clubs Clubs) {
+        this.Clubs = Clubs;
+    }
 
     public Long getId() {
         return id;
