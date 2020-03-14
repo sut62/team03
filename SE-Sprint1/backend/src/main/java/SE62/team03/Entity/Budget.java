@@ -38,15 +38,15 @@ public class Budget {
     }
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubs.class)
-    private Clubs clubs;
+    private @NotNull Clubs clubs;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = ClubType.class)
     @JoinColumn(name = "ClubType_ID", insertable = true)
-    private ClubType ClubType;
+    private @NotNull ClubType ClubType;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Clubmember.class)
     @JoinColumn(name = "CLUBMEMBER_ID", insertable = true)
-    private Clubmember clubmember;
+    private @NotNull Clubmember clubmember;
 
     public void setClubs(Clubs clubs) {
         this.clubs = clubs;
