@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import SE62.team03.Entity.Clubs;
-import SE62.team03.Repository.ClubsRepository;
+import SE62.team03.Entity.*;
+import SE62.team03.Repository.*;
+
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -23,14 +24,50 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ClubsTest {
 
     private Validator validator;
+    private ClubType ClubType;
+    private Branch Branch;
+    private Officer Officer;
+    private Year Year;
 
     @Autowired
     ClubsRepository ClubsRepository;
+
+    @Autowired
+    YearRepository yearRepository;
+
+    @Autowired
+    OfficerRepository officerRepository;
+
+    @Autowired
+    BranchRepository branchRepository;
+    
+    @Autowired
+    ClubTypeRepository ClubTypeRepository;
+
 
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
+
+        ClubType = new ClubType(); 
+        ClubType.setName("Club Type");
+        ClubType = ClubTypeRepository.saveAndFlush(ClubType);
+
+        Year = new Year();
+        Year.setName("1");
+        Year = yearRepository.saveAndFlush(Year);
+
+        Officer = new Officer();
+        Officer.setName("Name");
+        Officer.setOfficerStatus(1L);
+        Officer.setPassword("1234");
+        Officer.setUsername("10001");
+        Officer = officerRepository.saveAndFlush(Officer);
+
+        Branch = new Branch();
+        Branch.setName("Name");
+        Branch = branchRepository.saveAndFlush(Branch);
     }
     @Test
     void B5827657_tesClubFull() {
@@ -39,6 +76,11 @@ public class ClubsTest {
         clubs.setClubPresident("นายประธาน ชมรม");
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         clubs = ClubsRepository.saveAndFlush(clubs);
 
         Optional<Clubs> found = ClubsRepository.findById(clubs.getId());
@@ -47,6 +89,10 @@ public class ClubsTest {
         assertEquals("นายประธาน ชมรม", found.get().getClubPresident());
         assertEquals("อาจารย์ที่ปรึกษาชรม", found.get().getAdvisors());
         assertEquals("วัตถุประสงค์ชมรม", found.get().getObjective());
+        assertEquals(Branch, found.get().getBranch());
+        assertEquals(Year, found.get().getYear());
+        assertEquals(Officer, found.get().getOfficer());
+        assertEquals(ClubType, found.get().getClubType());
     }
 
     @Test
@@ -57,6 +103,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -74,6 +125,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(null);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -91,6 +147,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -108,6 +169,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective(null);
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -125,6 +191,11 @@ public class ClubsTest {
         clubs.setAdvisors(null);
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -142,6 +213,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -159,6 +235,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
@@ -176,6 +257,11 @@ public class ClubsTest {
         clubs.setAdvisors("อาจารย์ที่ปรึกษาชมรม");
         clubs.setObjective("วัตถุประสงค์ชมรม");
         clubs.setId(1L);
+        clubs.setBranch(Branch);
+        clubs.setYear(Year);
+        clubs.setOfficer(Officer);
+        clubs.setClubType(ClubType);
+
         Set<ConstraintViolation<Clubs>> result = validator.validate(clubs);
 
         assertEquals(1, result.size());
